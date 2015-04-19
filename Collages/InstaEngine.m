@@ -125,7 +125,7 @@ static InstaEngine *_sharedInstance = nil;
 
 
 -(NSURL *) getUsersSearchURLWith: (NSString *) queryString{
-    NSString *resultURLString = [[NSString alloc] init];
+    NSString *resultURLString = nil;
     if (_sharedInstance.isSignedIn){
         resultURLString = [NSString stringWithFormat:@"%@%@&access_token=%@", searchPeopleString, queryString, token];
     }
@@ -137,7 +137,7 @@ static InstaEngine *_sharedInstance = nil;
 }
 
 -(NSURL *) getPhotoSearchURLWith: (NSString *) userID{
-    NSString *resultURLString = [[NSString alloc] init];
+    NSString *resultURLString = nil;
     if (_sharedInstance.isSignedIn){
         resultURLString = [NSString stringWithFormat:@"%@%@/media/recent?count=20&access_token=%@", recentPhotoString, userID, token];
     } else {

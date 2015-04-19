@@ -134,6 +134,7 @@ float borderConer;
 }
 
 -(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     NSMutableArray *arrayWithIndexPaths = [NSMutableArray array];
     for (NSInteger i = selectedPhotoCount; i < [_collage.selectedPhotos count]; i++) {
         [arrayWithIndexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
@@ -143,6 +144,7 @@ float borderConer;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     //------lower liner
     UIBezierPath *path2 = [UIBezierPath bezierPath];
     [path2 moveToPoint:CGPointMake( 0, _modesCV.frame.origin.y)];

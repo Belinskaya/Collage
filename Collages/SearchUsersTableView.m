@@ -54,6 +54,7 @@ NSString *userID;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     _btnBack.title = (_iEngine.isSignedIn)? @"Sign out" : @"Sign In";
 }
 
