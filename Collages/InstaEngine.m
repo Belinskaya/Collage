@@ -18,7 +18,7 @@
 /*
  ADD YOUR CLIENT_ID HERE
  */
-static NSString *const client_id = @"YOUR_CLIENT_ID";
+static NSString *const client_id = @"53488ab0ba7e4adfa9d6eeaa4996fda0";
 
 
 static NSString *const redirectUri = @"http://instagram.com";

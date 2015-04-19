@@ -38,6 +38,8 @@
 		4A2127751AB463F600BF0F10 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2127291AB463F600BF0F10 /* UIWebView+AFNetworking.m */; };
 		4A555F661AB46EF500B6287A /* UserPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A555F651AB46EF500B6287A /* UserPhotosViewController.m */; };
 		4A555F691AB476C800B6287A /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A555F681AB476C800B6287A /* ImageCollectionViewCell.m */; };
+		4A7E9AE41AE29586007CC382 /* collage_templates.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A7E9AE31AE29586007CC382 /* collage_templates.txt */; };
+		4A7E9AEA1AE2ED13007CC382 /* More.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 4A7E9AE91AE2ED13007CC382 /* More.tiff */; };
 		4AB917DE1AB5B6A1000C69C8 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB917DD1AB5B6A1000C69C8 /* Accelerate.framework */; };
 		4AB917E11AB60A25000C69C8 /* SingInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB917E01AB60A25000C69C8 /* SingInViewController.m */; };
 /* End PBXBuildFile section */
@@ -116,6 +118,8 @@
 		4A555F651AB46EF500B6287A /* UserPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPhotosViewController.m; sourceTree = "<group>"; };
 		4A555F671AB476C800B6287A /* ImageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionViewCell.h; sourceTree = "<group>"; };
 		4A555F681AB476C800B6287A /* ImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewCell.m; sourceTree = "<group>"; };
+		4A7E9AE31AE29586007CC382 /* collage_templates.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = collage_templates.txt; path = ../collage_templates.txt; sourceTree = "<group>"; };
+		4A7E9AE91AE2ED13007CC382 /* More.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = More.tiff; sourceTree = "<group>"; };
 		4AB917DD1AB5B6A1000C69C8 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		4AB917DF1AB60A25000C69C8 /* SingInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingInViewController.h; sourceTree = "<group>"; };
 		4AB917E01AB60A25000C69C8 /* SingInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingInViewController.m; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 				4A21266A1AB2068500BF0F10 /* AppDelegate.m */,
 				4A21266F1AB2068500BF0F10 /* Main.storyboard */,
 				4A2126721AB2068500BF0F10 /* Images.xcassets */,
+				4A7E9AE91AE2ED13007CC382 /* More.tiff */,
 				4A2126741AB2068500BF0F10 /* LaunchScreen.xib */,
 				4A2126651AB2068500BF0F10 /* Supporting Files */,
 			);
@@ -180,6 +185,7 @@
 		4A2126651AB2068500BF0F10 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4A7E9AE31AE29586007CC382 /* collage_templates.txt */,
 				4A2126661AB2068500BF0F10 /* Info.plist */,
 				4A2126671AB2068500BF0F10 /* main.m */,
 			);
@@ -372,8 +378,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A7E9AE41AE29586007CC382 /* collage_templates.txt in Resources */,
 				4A2126711AB2068500BF0F10 /* Main.storyboard in Resources */,
 				4A2126761AB2068500BF0F10 /* LaunchScreen.xib in Resources */,
+				4A7E9AEA1AE2ED13007CC382 /* More.tiff in Resources */,
 				4A2126731AB2068500BF0F10 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

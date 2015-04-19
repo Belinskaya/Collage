@@ -17,6 +17,7 @@
 //Collection Views
 @property (weak, nonatomic) IBOutlet UICollectionView *selectedPhotoCV;
 @property (weak, nonatomic) IBOutlet UICollectionView *modesCV;
+//@property (weak, nonatomic) IBOutlet UIBarButtonItem *actionnButton;
 
 //Collages
 @property (strong, nonatomic) Collage *collage;
@@ -27,6 +28,9 @@
 @property BOOL isFreeForm;
 @property (weak, nonatomic) UIImageView *movingImage;
 @property (strong, nonatomic) UIImageView *movingCell;
+@property (strong, nonatomic) NSMutableArray *templates;
+//@property (weak, nonatomic) IBOutlet UIButton *tmpButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 
 @end
 
@@ -70,15 +74,41 @@ NSInteger selectedPhotoCount;
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
     
     _modesCV.backgroundColor = [UIColor lightGrayColor];
-    _selectedPhotoCV.backgroundColor = [UIColor clearColor];
+    _selectedPhotoCV.backgroundColor = [UIColor lightGrayColor];
     
     
-    _collageFrame.backgroundColor = [UIColor lightGrayColor];//lightGrayColor
+    _collageFrame.backgroundColor = [UIColor yellowColor];//lightGrayColor
     _collageFrame.layer.borderColor = [UIColor whiteColor].CGColor;
     _collageFrame.layer.borderWidth = 5.0f;
     
     _collage = [Collage sharedInstance];
     selectedPhotoCount = [_collage.selectedPhotos count];
+    
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"collage_templates" ofType:@"txt"];
+    
+    //création d'un string avec le contenu du JSON
+    NSString *myJSON = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
+    NSAssert(myJSON, @"File collage_templates.txt couldn't be read!");
+    
+    NSData *data = [myJSON dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *dict =[NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    _templates =[[NSMutableArray alloc] initWithCapacity:4];
+    
+    for (NSDictionary *i in [[dict objectForKey:@"collage_templates"] objectForKey:@"templates"]) {
+        [_templates addObject:i];
+    }
+    //[self.navigationItem setLeftBarButtonItems:<#(NSArray *)#>]
+    
+    self.navigationItem.leftItemsSupplementBackButton = YES;
+    UIBarButtonItem *tabItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"More.tiff"]
+                                                                style:UIBarButtonItemStylePlain
+                                                               target:self
+                                                               action:@selector(log:)];
+    //UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Custom" style:UIBarButtonItemStylePlain target:self action:@selector(action:)];
+    self.navigationItem.rightBarButtonItems = @[ _addButton, tabItem];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,6 +123,10 @@ NSInteger selectedPhotoCount;
     }
     [_selectedPhotoCV insertItemsAtIndexPaths:arrayWithIndexPaths];
     selectedPhotoCount =[_collage.selectedPhotos count];
+}
+
+-(void)log:(UIBarButtonItem*)sender{
+    
 }
 
 #pragma mark Gesture Recognizer Selectors
@@ -309,7 +343,7 @@ NSInteger selectedPhotoCount;
     if (view == _selectedPhotoCV) {
         return [_collage.selectedPhotos count];
     } else if (view == _modesCV){
-        return 2;
+        return [_templates count]+1;
     } else return 0;
 }
 
@@ -324,20 +358,23 @@ NSInteger selectedPhotoCount;
         [cell.imageView setHidden:YES];
         UIView *freeForm = [[UIView alloc] initWithFrame:cell.bounds];
         freeForm.backgroundColor = [UIColor clearColor];
-        freeForm.layer.borderWidth = 3.0f;
+        freeForm.layer.borderWidth = 2.0f;
         freeForm.layer.borderColor = [UIColor whiteColor].CGColor;
         if (indexPath.row == 0) {
             [cell addSubview:freeForm];
         } else {
+            NSDictionary *dict = [_templates objectAtIndex: indexPath.row-1];
+            NSArray *templ_array = [dict objectForKey:@"small_template"];
             UIBezierPath *path = [UIBezierPath bezierPath];
-            [path moveToPoint:CGPointMake(20.0, 0.0)];
-            [path addLineToPoint:CGPointMake(20.0, 20.0)];
-            [path moveToPoint:CGPointMake(0.0, 20.0)];
-            [path addLineToPoint:CGPointMake(40.0, 20.0)];
+            for (NSDictionary *d in templ_array) {
+                //float x =[d objectForKey:@"start_x"
+                [path moveToPoint:CGPointMake( [[d objectForKey:@"start_x"] floatValue], [[d objectForKey:@"start_y"] floatValue])];
+                [path addLineToPoint:CGPointMake( [[d objectForKey:@"end_x"] floatValue], [[d objectForKey:@"end_y"] floatValue])];
+            }
             CAShapeLayer *shapeLayer = [CAShapeLayer layer];
             shapeLayer.path = [path CGPath];
             shapeLayer.strokeColor = [[UIColor whiteColor] CGColor];
-            shapeLayer.lineWidth = 3.0;
+            shapeLayer.lineWidth = 2.0;
             shapeLayer.fillColor = [[UIColor clearColor] CGColor];
             [freeForm.layer addSublayer:shapeLayer];
             [cell addSubview:freeForm];
@@ -360,12 +397,14 @@ NSInteger selectedPhotoCount;
             _isFreeForm = YES;
             _collageFrame.backgroundColor = [UIColor lightGrayColor];
             [self deleteScrolls];
+            [self reesteblishImageViews];
         } else
         {
             _isFreeForm=NO;
             _collageFrame.backgroundColor = [UIColor whiteColor];
+            [self deleteScrolls];
             [self deleteUIImageView];
-            [self addScrolls];
+            [self addScrollsWithIndex:indexPath.row];
         }
         cell.layer.borderWidth = 2.0f;
         cell.layer.borderColor = self.navigationController.navigationBar.tintColor.CGColor;//[UIColor blueColor].CGColor;
@@ -405,8 +444,12 @@ NSInteger selectedPhotoCount;
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     if (collectionView == _modesCV){
         NSInteger cellCount = [collectionView.dataSource collectionView:collectionView numberOfItemsInSection:section];
-        CGFloat cellWidth = ((UICollectionViewFlowLayout*)collectionViewLayout).itemSize.width+((UICollectionViewFlowLayout*)collectionViewLayout).minimumInteritemSpacing;
-        CGFloat totalCellWidth = cellWidth*cellCount;
+        NSIndexPath *index = [[NSIndexPath alloc] initWithIndex:0];
+        CGSize size = [self collectionView:_modesCV
+                                    layout:collectionViewLayout
+                    sizeForItemAtIndexPath: index];
+        CGFloat cellWidth = size.width;
+        CGFloat totalCellWidth = cellWidth*cellCount +(((UICollectionViewFlowLayout*)collectionViewLayout).minimumInteritemSpacing * (cellCount - 1));
         CGFloat contentWidth = collectionView.frame.size.width-collectionView.contentInset.left-collectionView.contentInset.right;
         if( totalCellWidth<contentWidth )
         {
@@ -431,7 +474,26 @@ NSInteger selectedPhotoCount;
 }
 #pragma mark Utilities
 
--(void)addScrolls{
+-(void)addScrollsWithIndex: (NSInteger) index{
+    NSDictionary *dict = [_templates objectAtIndex: index-1];
+    NSArray *templ_array = [dict objectForKey:@"scrolls"];
+    int i =0;
+    for (NSDictionary *d in templ_array) {
+        float x = [[d objectForKey:@"x"] floatValue];
+        float y = [[d objectForKey:@"y"] floatValue];
+        float width = [[d objectForKey:@"width"] floatValue];
+        float height = [[d objectForKey:@"height"] floatValue];
+        CGRect frame = CGRectMake(x, y, width, height);
+        
+        UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:frame];
+        scroll.backgroundColor = [UIColor redColor];
+        [_collageFrame addSubview:scroll];
+        [self tuneScroll:scroll withContentSize:CGSizeMake(width, height) withScrollIndex:i];
+        i+=1;
+    }
+    
+    
+    /*
     float scrollWidth = (_collageFrame.bounds.size.width - 5)/2;
     //width = Height;
     
@@ -450,7 +512,7 @@ NSInteger selectedPhotoCount;
     scroll3.backgroundColor = [UIColor purpleColor];
     [_collageFrame addSubview:scroll3];
     [self tuneScroll:scroll3 withContentSize: CGSizeMake(_collageFrame.bounds.size.width, _collageFrame.bounds.size.width) withScrollIndex:2];
-    
+    */
     
 }
 
@@ -460,6 +522,9 @@ NSInteger selectedPhotoCount;
             [i removeFromSuperview];
         }
     }
+}
+
+-(void)reesteblishImageViews{
     float x = 75.0f;
     float y = 75.0f;
     float offset = _collageFrame.bounds.size.width/ [_collage.collagePhotos count];
@@ -473,8 +538,9 @@ NSInteger selectedPhotoCount;
         x += offset;
         y += offset;
     }
-    
 }
+
+
 
 -(void) deleteUIImageView{
     for (id i in _collageFrame.subviews){
@@ -486,8 +552,9 @@ NSInteger selectedPhotoCount;
 
 -(void)tuneScroll: (UIScrollView *)scroll withContentSize: (CGSize) size withScrollIndex: (NSInteger) index
 {
-    scroll.contentSize = size;
-    CGRect frame = (CGRect){.origin=CGPointMake(0.0f, 0.0f), size};
+    float biggestSide = (size.height>size.width)? size.height : size.width;
+    scroll.contentSize = CGSizeMake(biggestSide, biggestSide);
+    CGRect frame = (CGRect){.origin=CGPointMake(0.0f, 0.0f), scroll.contentSize};
     UIImageView *imView = [[UIImageView alloc] initWithFrame: frame];
     //UIScrollView by default contains 2 UIImageViews as subviews for scroll indicators.
     //so we need tag for mark ours
@@ -499,7 +566,7 @@ NSInteger selectedPhotoCount;
     @catch (NSException *exception) {
         //do nothing
     }
-
+    
     [scroll addSubview:imView];
 }
 
