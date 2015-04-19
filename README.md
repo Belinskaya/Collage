@@ -1,4 +1,3 @@
 # Collage
 
-
-![](https://cloud.githubusercontent.com/assets/8221314/7173991/4da7f672-e409-11e4-848d-fde99705d709.gif)
+![](https://cloud.githubusercontent.com/assets/8221314/7220544/2cd6d40e-e6d4-11e4-92f7-943d96ed4cd9.gif)
