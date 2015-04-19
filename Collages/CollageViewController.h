@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ButtonsViewController.h"
+#import "ChangingBordersViewController.h"
 
-@interface CollageViewController : UIViewController< UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout>
+@interface CollageViewController : UIViewController< UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout,
+     UIPopoverPresentationControllerDelegate, ButtonsDelegate, BordersDelegate>
 
 
 @end

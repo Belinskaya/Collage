@@ -40,6 +40,8 @@
 		4A555F691AB476C800B6287A /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A555F681AB476C800B6287A /* ImageCollectionViewCell.m */; };
 		4A7E9AE41AE29586007CC382 /* collage_templates.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A7E9AE31AE29586007CC382 /* collage_templates.txt */; };
 		4A7E9AEA1AE2ED13007CC382 /* More.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 4A7E9AE91AE2ED13007CC382 /* More.tiff */; };
+		4A7E9AEF1AE3B4CB007CC382 /* ButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7E9AEE1AE3B4CB007CC382 /* ButtonsViewController.m */; };
+		4A7E9AF21AE3E56D007CC382 /* ChangingBordersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7E9AF11AE3E56D007CC382 /* ChangingBordersViewController.m */; };
 		4AB917DE1AB5B6A1000C69C8 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB917DD1AB5B6A1000C69C8 /* Accelerate.framework */; };
 		4AB917E11AB60A25000C69C8 /* SingInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB917E01AB60A25000C69C8 /* SingInViewController.m */; };
 /* End PBXBuildFile section */
@@ -120,6 +122,10 @@
 		4A555F681AB476C800B6287A /* ImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewCell.m; sourceTree = "<group>"; };
 		4A7E9AE31AE29586007CC382 /* collage_templates.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = collage_templates.txt; path = ../collage_templates.txt; sourceTree = "<group>"; };
 		4A7E9AE91AE2ED13007CC382 /* More.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = More.tiff; sourceTree = "<group>"; };
+		4A7E9AED1AE3B4CB007CC382 /* ButtonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonsViewController.h; sourceTree = "<group>"; };
+		4A7E9AEE1AE3B4CB007CC382 /* ButtonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonsViewController.m; sourceTree = "<group>"; };
+		4A7E9AF01AE3E56D007CC382 /* ChangingBordersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangingBordersViewController.h; sourceTree = "<group>"; };
+		4A7E9AF11AE3E56D007CC382 /* ChangingBordersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangingBordersViewController.m; sourceTree = "<group>"; };
 		4AB917DD1AB5B6A1000C69C8 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		4AB917DF1AB60A25000C69C8 /* SingInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingInViewController.h; sourceTree = "<group>"; };
 		4AB917E01AB60A25000C69C8 /* SingInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingInViewController.m; sourceTree = "<group>"; };
@@ -222,6 +228,10 @@
 				4A555F651AB46EF500B6287A /* UserPhotosViewController.m */,
 				4A555F671AB476C800B6287A /* ImageCollectionViewCell.h */,
 				4A555F681AB476C800B6287A /* ImageCollectionViewCell.m */,
+				4A7E9AED1AE3B4CB007CC382 /* ButtonsViewController.h */,
+				4A7E9AEE1AE3B4CB007CC382 /* ButtonsViewController.m */,
+				4A7E9AF01AE3E56D007CC382 /* ChangingBordersViewController.h */,
+				4A7E9AF11AE3E56D007CC382 /* ChangingBordersViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -405,6 +415,7 @@
 				4A2127741AB463F600BF0F10 /* UIRefreshControl+AFNetworking.m in Sources */,
 				4A2127321AB463F600BF0F10 /* AFURLSessionManager.m in Sources */,
 				4A21272F1AB463F600BF0F10 /* AFURLConnectionOperation.m in Sources */,
+				4A7E9AF21AE3E56D007CC382 /* ChangingBordersViewController.m in Sources */,
 				4A2127701AB463F600BF0F10 /* UIAlertView+AFNetworking.m in Sources */,
 				4A2127721AB463F600BF0F10 /* UIImageView+AFNetworking.m in Sources */,
 				4A21272A1AB463F600BF0F10 /* AFHTTPRequestOperation.m in Sources */,
@@ -414,6 +425,7 @@
 				4A21269C1AB4638400BF0F10 /* InstaPhoto.m in Sources */,
 				4A21269B1AB4638400BF0F10 /* InstaEngine.m in Sources */,
 				4A21272C1AB463F600BF0F10 /* AFHTTPSessionManager.m in Sources */,
+				4A7E9AEF1AE3B4CB007CC382 /* ButtonsViewController.m in Sources */,
 				4A21266E1AB2068500BF0F10 /* CollageViewController.m in Sources */,
 				4A555F661AB46EF500B6287A /* UserPhotosViewController.m in Sources */,
 				4A21269D1AB4638400BF0F10 /* InstaUser.m in Sources */,

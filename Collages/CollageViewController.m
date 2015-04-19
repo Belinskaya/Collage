@@ -13,6 +13,7 @@
 #import "InstaPhoto.h"
 #import "UIImageView+AFNetworking.h"
 
+
 @interface CollageViewController ()
 //Collection Views
 @property (weak, nonatomic) IBOutlet UICollectionView *selectedPhotoCV;
@@ -29,8 +30,11 @@
 @property (weak, nonatomic) UIImageView *movingImage;
 @property (strong, nonatomic) UIImageView *movingCell;
 @property (strong, nonatomic) NSMutableArray *templates;
-//@property (weak, nonatomic) IBOutlet UIButton *tmpButton;
+@property (nonatomic, strong) UIPopoverController *popover;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
+@property (strong, nonatomic) UIBarButtonItem *moreButton;
+@property (strong, nonatomic) ButtonsViewController *btnController;
+@property (strong, nonatomic) ChangingBordersViewController *changingBorderController;
 
 @end
 
@@ -39,6 +43,8 @@
 #pragma mark Variables
 NSInteger photoIndex;
 NSInteger selectedPhotoCount;
+NSInteger borderWidth;
+float borderConer;
 
 
 - (void)viewDidLoad {
@@ -46,7 +52,11 @@ NSInteger selectedPhotoCount;
     // Do any additional setup after loading the view, typically from a nib.
     
     _isFreeForm = YES;
+    borderWidth = 3;
+    borderConer = 0;
     
+    UIColor *collectionViewColor = [UIColor colorWithRed:52.0f/255.0f green:73.0f/255.0f blue:94.0f/255.0f alpha:1.0f];
+    UIColor *mainBackgroundColor = [UIColor colorWithRed:103.0f/255.0f green:128.0f/255.0f blue:159.0f/255.0f alpha:1.0f];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
@@ -60,26 +70,22 @@ NSInteger selectedPhotoCount;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createNewImage:)];
     tap.numberOfTapsRequired = 2;
     [_collageFrame addGestureRecognizer:tap];
-    _collageFrame.layer.borderColor = [UIColor whiteColor].CGColor;
-    _collageFrame.layer.borderWidth = 5.0f;
     [_collageFrame addSubview:_movingImage];
 
     
     UICollectionViewFlowLayout *flowLayoutForModes = [[UICollectionViewFlowLayout alloc] init];
     [flowLayoutForModes  setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     [_modesCV setCollectionViewLayout:flowLayoutForModes];
+
+    self.view.backgroundColor = mainBackgroundColor;
+    
+    _modesCV.backgroundColor = collectionViewColor;
+    _selectedPhotoCV.backgroundColor = collectionViewColor;
     
     
-    UIImage *image = [UIImage imageNamed:@"wall"];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
-    
-    _modesCV.backgroundColor = [UIColor lightGrayColor];
-    _selectedPhotoCV.backgroundColor = [UIColor lightGrayColor];
-    
-    
-    _collageFrame.backgroundColor = [UIColor yellowColor];//lightGrayColor
+    _collageFrame.backgroundColor = [UIColor clearColor];//lightGrayColor
     _collageFrame.layer.borderColor = [UIColor whiteColor].CGColor;
-    _collageFrame.layer.borderWidth = 5.0f;
+    _collageFrame.layer.borderWidth = 1.0f;
     
     _collage = [Collage sharedInstance];
     selectedPhotoCount = [_collage.selectedPhotos count];
@@ -103,12 +109,23 @@ NSInteger selectedPhotoCount;
     //[self.navigationItem setLeftBarButtonItems:<#(NSArray *)#>]
     
     self.navigationItem.leftItemsSupplementBackButton = YES;
-    UIBarButtonItem *tabItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"More.tiff"]
+    _moreButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"More.tiff"]
                                                                 style:UIBarButtonItemStylePlain
                                                                target:self
-                                                               action:@selector(log:)];
-    //UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Custom" style:UIBarButtonItemStylePlain target:self action:@selector(action:)];
-    self.navigationItem.rightBarButtonItems = @[ _addButton, tabItem];
+                                                               action:@selector(showPopover:)];
+    self.navigationItem.rightBarButtonItems = @[ _addButton, _moreButton];
+    
+    
+    //-----upper line
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake( 0, _selectedPhotoCV.frame.origin.y + _selectedPhotoCV.frame.size.height )];
+    [path addLineToPoint:CGPointMake( self.view.frame.size.width, _selectedPhotoCV.frame.origin.y + _selectedPhotoCV.frame.size.height)];
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    shapeLayer.path = [path CGPath];
+    shapeLayer.strokeColor = [[UIColor grayColor] CGColor];
+    shapeLayer.lineWidth = 1.0;
+    shapeLayer.fillColor = [[UIColor clearColor] CGColor];
+    [self.view.layer addSublayer:shapeLayer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -125,8 +142,84 @@ NSInteger selectedPhotoCount;
     selectedPhotoCount =[_collage.selectedPhotos count];
 }
 
--(void)log:(UIBarButtonItem*)sender{
+-(void)viewDidAppear:(BOOL)animated{
+    //------lower liner
+    UIBezierPath *path2 = [UIBezierPath bezierPath];
+    [path2 moveToPoint:CGPointMake( 0, _modesCV.frame.origin.y)];
+    [path2 addLineToPoint:CGPointMake( self.view.frame.size.width, _modesCV.frame.origin.y )];
+    CAShapeLayer *shapeLayer2 = [CAShapeLayer layer];
+    shapeLayer2.path = [path2 CGPath];
+    shapeLayer2.strokeColor = [[UIColor grayColor] CGColor];
+    shapeLayer2.lineWidth = 1.0;
+    shapeLayer2.fillColor = [[UIColor clearColor] CGColor];
+    [self.view.layer addSublayer:shapeLayer2];
+}
+
+-(void)showPopover:(UIBarButtonItem*)sender{
+    if(!_btnController){
+        _btnController = [[ButtonsViewController alloc] init];
+        _btnController.delegate = self;
+    }
+    if (_popover == nil) {
+        _btnController.modalPresentationStyle = UIModalPresentationPopover;
+        UIPopoverPresentationController *pc = [ _btnController popoverPresentationController];
+        pc.barButtonItem = sender;
+        pc.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        pc.delegate = self;
+        [self presentViewController: _btnController animated:YES completion:nil];
+    } else {
+        //The color picker popover is showing. Hide it.
+        [_popover dismissPopoverAnimated:YES];
+        _popover = nil;
+    }
     
+}
+
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller{
+    return UIModalPresentationNone;
+}
+
+-(void)showBordersPopover:(id)sender{
+    [self dismissViewControllerAnimated:NO completion:nil];
+    _popover = nil;
+    if(!_changingBorderController){
+        _changingBorderController = [[ChangingBordersViewController alloc] init];
+        _changingBorderController.delegate = self;
+    }
+    if (_popover == nil) {
+        _changingBorderController.modalPresentationStyle = UIModalPresentationPopover;
+        UIPopoverPresentationController *pc = [ _changingBorderController popoverPresentationController];
+        pc.barButtonItem = _moreButton;
+        pc.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        pc.delegate = self;
+        [self presentViewController: _changingBorderController animated:NO completion:nil];
+    } else {
+        //The color picker popover is showing. Hide it.
+        [_popover dismissPopoverAnimated:YES];
+        _popover = nil;
+    }
+}
+
+-(void)changeBordersWidth:(UISlider *)sender{
+    for (id i in _collageFrame.subviews) {
+        if( [i isKindOfClass:[UIScrollView class]]){
+            UIScrollView *scroll= i;
+            scroll.layer.borderWidth = sender.value;
+        }
+    }
+    borderWidth = sender.value;
+}
+
+-(void) changeConerRadius:(UISlider *)sender{
+    for (id i in _collageFrame.subviews) {
+        if( [i isKindOfClass:[UIScrollView class]]){
+            UIScrollView *scroll= i;
+            float maxRadius = scroll.frame.size.height/2;
+            borderConer = sender.value*maxRadius/100;
+            scroll.layer.cornerRadius = borderConer;
+        }
+    }
 }
 
 #pragma mark Gesture Recognizer Selectors
@@ -331,10 +424,7 @@ NSInteger selectedPhotoCount;
     _movingImage.image = img;
     [_collage.collagePhotos addObject:img];
     NSDictionary *photoDictionary = @{@"info": [NSNull null], @"smallImage": img};
-    //NSInteger index = [_collage.selectedPhotos count];
-    //NSArray *arrayWithIndexPaths = @[[NSIndexPath indexPathForRow:index inSection:0]];
     [_collage.selectedPhotos addObject:photoDictionary];
-    //[_selectedPhotoCV insertItemsAtIndexPaths:arrayWithIndexPaths];
 }
 
 #pragma mark UICollectionView - sources
@@ -354,7 +444,6 @@ NSInteger selectedPhotoCount;
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ImageCollectionViewCell *cell = (ImageCollectionViewCell *)[cv dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
     if (cv == _modesCV){
-        //CGRect frame = CGRectMake(5, 5, 30, 30);
         [cell.imageView setHidden:YES];
         UIView *freeForm = [[UIView alloc] initWithFrame:cell.bounds];
         freeForm.backgroundColor = [UIColor clearColor];
@@ -367,7 +456,6 @@ NSInteger selectedPhotoCount;
             NSArray *templ_array = [dict objectForKey:@"small_template"];
             UIBezierPath *path = [UIBezierPath bezierPath];
             for (NSDictionary *d in templ_array) {
-                //float x =[d objectForKey:@"start_x"
                 [path moveToPoint:CGPointMake( [[d objectForKey:@"start_x"] floatValue], [[d objectForKey:@"start_y"] floatValue])];
                 [path addLineToPoint:CGPointMake( [[d objectForKey:@"end_x"] floatValue], [[d objectForKey:@"end_y"] floatValue])];
             }
@@ -395,19 +483,17 @@ NSInteger selectedPhotoCount;
     if (collectionView == _modesCV){
         if (indexPath.row == 0 ){
             _isFreeForm = YES;
-            _collageFrame.backgroundColor = [UIColor lightGrayColor];
             [self deleteScrolls];
             [self reesteblishImageViews];
         } else
         {
             _isFreeForm=NO;
-            _collageFrame.backgroundColor = [UIColor whiteColor];
             [self deleteScrolls];
             [self deleteUIImageView];
             [self addScrollsWithIndex:indexPath.row];
         }
         cell.layer.borderWidth = 2.0f;
-        cell.layer.borderColor = self.navigationController.navigationBar.tintColor.CGColor;//[UIColor blueColor].CGColor;
+        cell.layer.borderColor = self.navigationController.navigationBar.tintColor.CGColor;
     }
     
 }
@@ -436,7 +522,6 @@ NSInteger selectedPhotoCount;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    //if (collectionView == self.modesCV) { return 30.0f; }
     return 10.0;
 }
 
@@ -486,33 +571,11 @@ NSInteger selectedPhotoCount;
         CGRect frame = CGRectMake(x, y, width, height);
         
         UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:frame];
-        scroll.backgroundColor = [UIColor redColor];
+        scroll.backgroundColor = [UIColor clearColor];
         [_collageFrame addSubview:scroll];
         [self tuneScroll:scroll withContentSize:CGSizeMake(width, height) withScrollIndex:i];
         i+=1;
     }
-    
-    
-    /*
-    float scrollWidth = (_collageFrame.bounds.size.width - 5)/2;
-    //width = Height;
-    
-    UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, scrollWidth, scrollWidth)];
-    scroll.backgroundColor = [UIColor redColor];
-    [_collageFrame addSubview:scroll];
-    [self tuneScroll:scroll withContentSize: CGSizeMake(scrollWidth, scrollWidth) withScrollIndex:0];
-    
-    UIScrollView *scroll2 = [[UIScrollView alloc] initWithFrame:CGRectMake(5 + scrollWidth, 0, scrollWidth, scrollWidth)];
-    scroll2.backgroundColor = [UIColor greenColor];
-    [_collageFrame addSubview:scroll2];
-    [self tuneScroll:scroll2 withContentSize: CGSizeMake(scrollWidth, scrollWidth) withScrollIndex:1];
-    
-    
-    UIScrollView *scroll3 = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 5 + scrollWidth, _collageFrame.bounds.size.width , scrollWidth)];
-    scroll3.backgroundColor = [UIColor purpleColor];
-    [_collageFrame addSubview:scroll3];
-    [self tuneScroll:scroll3 withContentSize: CGSizeMake(_collageFrame.bounds.size.width, _collageFrame.bounds.size.width) withScrollIndex:2];
-    */
     
 }
 
@@ -566,7 +629,8 @@ NSInteger selectedPhotoCount;
     @catch (NSException *exception) {
         //do nothing
     }
-    
+    scroll.layer.borderWidth = borderWidth;
+    scroll.layer.borderColor = [UIColor whiteColor].CGColor;
     [scroll addSubview:imView];
 }
 
@@ -598,7 +662,6 @@ NSInteger selectedPhotoCount;
     NSDictionary *photoDict = _collage.selectedPhotos[photoIndex];
     id photo = [photoDict objectForKey:@"info"];
     if (photo != [NSNull null]){
-        NSLog(@"i am here");
         NSURLRequest *request = [NSURLRequest requestWithURL:[photo getStandartResolutionURL]];
         __weak UIImageView *iView = container;
         [iView setImageWithURLRequest:request
@@ -636,7 +699,6 @@ NSInteger selectedPhotoCount;
     }
 }
 -(UIImage *) makeImage{
-    //UIGraphicsBeginImageContext(self.collageFrame.bounds.size);
     UIGraphicsBeginImageContextWithOptions(_collageFrame.bounds.size, NO, 0.0);
     [_collageFrame.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();

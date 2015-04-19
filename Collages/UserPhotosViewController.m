@@ -36,6 +36,13 @@ NSInteger photoCount = 200;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UIColor *collectionViewColor = [UIColor colorWithRed:52.0f/255.0f green:73.0f/255.0f blue:94.0f/255.0f alpha:1.0f];
+    UIColor *mainBackgroundColor = [UIColor colorWithRed:103.0f/255.0f green:128.0f/255.0f blue:159.0f/255.0f alpha:1.0f];
+    
+    self.selectedPhotosCV.backgroundColor = collectionViewColor;
+    self.view.backgroundColor = mainBackgroundColor ;
+    
     _userPhotosCollectionView.backgroundColor = [UIColor clearColor];
     
     _iEngine = [InstaEngine sharedInstance];
@@ -172,7 +179,7 @@ NSInteger photoCount = 200;
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     ImageCollectionViewCell *cell =  (ImageCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if (collectionView == _userPhotosCollectionView){
-        cell.layer.borderColor = self.navigationController.navigationBar.tintColor.CGColor;
+        cell.layer.borderColor = [UIColor whiteColor].CGColor;
         InstaPhoto *photo = _usersPhotos[indexPath.row];
         NSDictionary *photoDictionary = @{@"info": photo, @"smallImage": cell.imageView.image};
         NSInteger index = [_collage.selectedPhotos count];
