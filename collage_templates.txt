@@ -37,7 +37,14 @@
       "small_template":[{"start_x": 0, "start_y":10, "end_x":40, "end_y":10},
                         {"start_x": 0, "start_y":20, "end_x":40, "end_y":20},
                         {"start_x": 0, "start_y":30, "end_x":40, "end_y":30}]
-    }
+    },
+    {"index":5,
+        "scrolls": [{"x":0, "y":0, "width": 320, "height":320}],
+    "small_template":[{"start_x": 0, "start_y":0, "end_x":40, "end_y":0},
+                        {"start_x": 40, "start_y":0, "end_x":40, "end_y":40},
+                        {"start_x": 40, "start_y":40, "end_x":0, "end_y":40},
+                        {"start_x": 0, "start_y":40, "end_x":0, "end_y":0}]
+}
     ]
  }
 }

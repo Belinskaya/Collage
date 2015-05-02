@@ -246,6 +246,7 @@ float borderConer;
         [newImage addGestureRecognizer:doubleTap];
         [_collageFrame addSubview:newImage];
         newImage.center = locationPointInCollageView;
+        _movingImage = newImage;
         UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:@"Select image from" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"From library",@"From camera",  nil] ;
         
         [action showInView:self.view];
