@@ -18,7 +18,7 @@
 /*
  ADD YOUR CLIENT_ID HERE
  */
-static NSString *const client_id = @"267939c79a88482e8a99817dd74cde54";
+static NSString *const client_id = @"TEST_CLIENT_ID";
 
 
 
