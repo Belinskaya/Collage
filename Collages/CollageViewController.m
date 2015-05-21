@@ -11,7 +11,9 @@
 #import "ImageCollectionViewCell.h"
 #import "SearchUsersTableView.h"
 #import "InstaPhoto.h"
+#import "InstaEngine.h"
 #import "UIImageView+AFNetworking.h"
+#import "InstagramActivity.h"
 
 
 @interface CollageViewController ()
@@ -32,9 +34,12 @@
 @property (strong, nonatomic) NSMutableArray *templates;
 @property (nonatomic, strong) UIPopoverController *popover;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *actionBarButton;
 @property (strong, nonatomic) UIBarButtonItem *moreButton;
 @property (strong, nonatomic) ButtonsViewController *btnController;
 @property (strong, nonatomic) ChangingBordersViewController *changingBorderController;
+@property (strong, nonatomic) InstaEngine *iEngine;
+@property (retain)UIDocumentInteractionController *documentController;
 
 @end
 
@@ -49,6 +54,7 @@ float borderConer;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     _iEngine = [InstaEngine sharedInstance];
     // Do any additional setup after loading the view, typically from a nib.
     
     _isFreeForm = YES;
@@ -83,7 +89,7 @@ float borderConer;
     _selectedPhotoCV.backgroundColor = collectionViewColor;
     
     
-    _collageFrame.backgroundColor = [UIColor clearColor];//lightGrayColor
+    _collageFrame.backgroundColor = mainBackgroundColor ;//[UIColor whiteColor];//lightGrayColor
     _collageFrame.layer.borderColor = [UIColor whiteColor].CGColor;
     _collageFrame.layer.borderWidth = 1.0f;
     
@@ -410,7 +416,11 @@ float borderConer;
             break;
         }
         case 2:
+            if (_iEngine.isSignedIn){
             [self performSegueWithIdentifier:@"openSearch" sender:self];
+            } else {
+                [self performSegueWithIdentifier:@"SignIn" sender:self];
+            }
             break;
         default:
             break;
@@ -606,8 +616,6 @@ float borderConer;
     }
 }
 
-
-
 -(void) deleteUIImageView{
     for (id i in _collageFrame.subviews){
         if( [i isKindOfClass:[UIImageView class]]){
@@ -701,6 +709,7 @@ float borderConer;
                          completion:^(BOOL finished){[_movingCell removeFromSuperview]; }];
     }
 }
+
 -(UIImage *) makeImage{
     UIGraphicsBeginImageContextWithOptions(_collageFrame.bounds.size, NO, 0.0);
     [_collageFrame.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -708,8 +717,6 @@ float borderConer;
     UIGraphicsEndImageContext();
     return image;
 }
-
-
 
 #pragma mark IBActions
 - (IBAction)addPhotos:(id)sender {
@@ -721,10 +728,40 @@ float borderConer;
     
     
     [sharingItems addObject:[self makeImage]];
+    InstagramActivity *instaActivity = [[InstagramActivity alloc] init];
     
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:[NSArray arrayWithObject:instaActivity]];
+    NSArray *excludeActivities = @[
+                                   UIActivityTypePostToWeibo,
+                                   UIActivityTypePrint,
+                                   UIActivityTypeCopyToPasteboard,
+                                   UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToVimeo,
+                                   UIActivityTypePostToTencentWeibo];
     
-    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
+    activityController.excludedActivityTypes = excludeActivities;
+    UIActivityViewControllerCompletionWithItemsHandler compl = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+        if ([activityType isEqualToString:@"Instagram"]){
+            NSString *documentDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+            // *.igo is exclusive to instagram
+            NSString *saveImagePath = [documentDirectory stringByAppendingPathComponent:@"Image.igo"];
+            NSLog(@"saveImagePath  %@", saveImagePath);
+            NSData *imageData = UIImagePNGRepresentation([sharingItems objectAtIndex:0]);
+            [imageData writeToFile:saveImagePath atomically:YES];
+            
+            NSURL *instagramURL = [NSURL URLWithString:@"instagram://camera"];
+            if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+                _documentController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:saveImagePath]];
+                _documentController.UTI = @"com.instagram.photo";
+                //_documentController.annotation = [NSDictionary dictionaryWithObject:@"my caption" forKey:@"InstagramCaption"];
+                [_documentController presentOpenInMenuFromBarButtonItem:_actionBarButton animated:YES];
+            }
+
+        }
+    };
     [self presentViewController:activityController animated:YES completion:nil];
+    [activityController setCompletionWithItemsHandler: compl];
 }
+
 
 @end

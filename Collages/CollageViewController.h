@@ -11,7 +11,7 @@
 #import "ChangingBordersViewController.h"
 
 @interface CollageViewController : UIViewController< UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout,
-     UIPopoverPresentationControllerDelegate, ButtonsDelegate, BordersDelegate>
+     UIPopoverPresentationControllerDelegate, ButtonsDelegate, BordersDelegate,UIDocumentInteractionControllerDelegate>
 
 
 @end

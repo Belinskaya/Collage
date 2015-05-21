@@ -18,7 +18,7 @@
 /*
  ADD YOUR CLIENT_ID HERE
  */
-static NSString *const client_id = @"TEST_CLIENT_ID";
+static NSString *const client_id = @"267939c79a88482e8a99817dd74cde54";
 
 
 
@@ -74,6 +74,7 @@ static InstaEngine *_sharedInstance = nil;
 }
 
 -(void) forgetUser{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"access_token"];
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (NSHTTPCookie *cookie in [storage cookies]) {
         [storage deleteCookie:cookie];

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="s71-XY-wdp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="s71-XY-wdp">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -153,11 +153,13 @@
                     </navigationItem>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="actionBarButton" destination="gpE-tF-jnD" id="8mF-0g-8EK"/>
                         <outlet property="addButton" destination="AdP-34-3nS" id="Yvy-Qd-ZEm"/>
                         <outlet property="collageFrame" destination="yZV-3J-OMa" id="4SB-oR-Vpg"/>
                         <outlet property="modesCV" destination="oEp-if-De3" id="1ZR-oL-t7N"/>
                         <outlet property="selectedPhotoCV" destination="tLF-Le-s3b" id="gdG-Z1-uvw"/>
                         <segue destination="tuO-vj-J5c" kind="show" identifier="openSearch" id="10i-X8-naw"/>
+                        <segue destination="BCO-hU-Lal" kind="show" identifier="SignIn" id="Lbt-25-Q27"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -197,11 +199,12 @@
                     <connections>
                         <outlet property="activityIndicator" destination="yLw-N9-dRF" id="1fb-Dc-5fZ"/>
                         <outlet property="webView" destination="7AZ-8f-YfR" id="ii6-js-bzz"/>
+                        <segue destination="tuO-vj-J5c" kind="show" identifier="openSearch" id="AYJ-Ar-2wD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ngz-kb-bJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3603" y="-261"/>
+            <point key="canvasLocation" x="2355" y="-275"/>
         </scene>
         <!--Search Users-->
         <scene sceneID="bIQ-XX-4bs">
@@ -433,4 +436,8 @@
             <point key="canvasLocation" x="1255" y="452"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="10i-X8-naw"/>
+        <segue reference="Lbt-25-Q27"/>
+    </inferredMetricsTieBreakers>
 </document>
