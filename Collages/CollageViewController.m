@@ -41,6 +41,7 @@
 @property (strong, nonatomic) ChangingBordersViewController *changingBorderController;
 @property (strong, nonatomic) InstaEngine *iEngine;
 @property (retain)UIDocumentInteractionController *documentController;
+@property (strong, nonatomic) UIImageView *zoomedImageView;
 
 @end
 
@@ -272,14 +273,12 @@ float borderConer;
                 [_collageFrame bringSubviewToFront:imgView];
                 //[self.movingCell removeFromSuperview];
             } else{
-                NSInteger s_i = 0;
                 for (id i in _collageFrame.subviews){
                     if( [i isKindOfClass:[UIScrollView class]]){
                         UIScrollView *tmpScroll = (UIScrollView *)i;
                         CGRect frameRelativeToParent= [tmpScroll convertRect: tmpScroll.bounds
                                                                                            toView:self.view];
-                        NSInteger img_i = 0;
-                        
+                        NSLog(@"c_w = %f, c_h = %f", tmpScroll.contentSize.width, tmpScroll.contentSize.height);
                         if (CGRectContainsPoint( frameRelativeToParent, _movingCell.center)){
                             for (id y in tmpScroll.subviews){
                                 if( [y isKindOfClass:[UIImageView class]]){
@@ -288,12 +287,9 @@ float borderConer;
                                         [self holdInContainer:imgView withIndex: photoIndex];
                                         [_movingCell removeFromSuperview];
                                     }
-                                    img_i+=1;
                                 }
                             }
                         }
-                        s_i+=1;
-                        
                     }
                 }
             }
@@ -363,23 +359,54 @@ float borderConer;
     [self showActionSheet];
 }
 
+- (void)scrollViewDoubleTapped:(UITapGestureRecognizer*)recognizer {
+    NSLog(@"scrollViewDoubleTapped");
+    UIScrollView *scroll = (UIScrollView *) recognizer.view;
+    for (id y in scroll.subviews){
+        if( [y isKindOfClass:[UIImageView class]]){
+            UIImageView *imgView = y;
+            if (imgView.tag!=0){
+                _zoomedImageView = imgView;
+            }
+        }
+    }
+    CGPoint pointInView = [recognizer locationInView:_zoomedImageView];
+    
+    CGFloat newZoomScale = scroll.zoomScale * 1.5f;
+    newZoomScale = MIN(newZoomScale, scroll.maximumZoomScale);
+    
+    CGSize scrollViewSize = scroll.bounds.size;
+    
+    CGFloat w = scrollViewSize.width / newZoomScale;
+    CGFloat h = scrollViewSize.height / newZoomScale;
+    
+    NSLog(@"w = %f, h = %f, newZoomScale = %f", w, h, newZoomScale);
+    CGFloat x = pointInView.x - (w / 2.0f);
+    CGFloat y = pointInView.y - (h / 2.0f);
+    
+    CGRect rectToZoomTo = CGRectMake(x, y, w, h);
+    
+    // 4
+    [scroll zoomToRect:rectToZoomTo animated:YES];
+}
+
+- (void)scrollViewTwoFingerTapped:(UITapGestureRecognizer*)recognizer {
+    NSLog(@"scrollViewTwoFingerTapped");
+    // Zoom out slightly, capping at the minimum zoom scale specified by the scroll view
+    /*CGFloat newZoomScale = self.scrollView.zoomScale / 1.5f;
+    newZoomScale = MAX(newZoomScale, self.scrollView.minimumZoomScale);
+    [self.scrollView setZoomScale:newZoomScale animated:YES];*/
+}
+
 #pragma mark - ActionSheet delegates
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (buttonIndex) {
         case 0:
-            {/*UIImagePickerController *pickerView = [[UIImagePickerController alloc] init];
-                pickerView.allowsEditing = YES;
-                pickerView.delegate = self;
-                [pickerView setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-                [self presentViewController:pickerView animated:YES completion:nil];
-                break;*/
+            {
                 [self performSegueWithIdentifier:@"showPhotoLibrary" sender:self];
-                //AlbumContentsViewController *albumContent = [[AlbumContentsViewController alloc] init];
-                 //[self.parentViewController presentViewController:albumContent animated:YES completion:nil];
                 break;
-                //showPhotoLibrary
             }
         case 1:
         {
@@ -416,6 +443,23 @@ float borderConer;
     [_collage.collagePhotos addObject:img];
     NSDictionary *photoDictionary = @{@"info": [NSNull null], @"smallImage": img};
     [_collage.selectedPhotos addObject:photoDictionary];
+}
+
+#pragma mark - ScrollView delegates
+
+- (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    // Return the view that you want to zoom
+    UIImageView *returnImageView = [[UIImageView alloc] init];
+    for (id y in scrollView.subviews){
+        if( [y isKindOfClass:[UIImageView class]]){
+            UIImageView *imgView = y;
+            if (imgView.tag!=0){
+                returnImageView = imgView;
+            }
+        }
+    }
+    return returnImageView;
+    //return  _zoomedImageView;
 }
 
 #pragma mark UICollectionView - sources
@@ -619,12 +663,25 @@ float borderConer;
     @catch (NSException *exception) {
         //do nothing
     }
+    
+    
+    UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewDoubleTapped:)];
+    doubleTapRecognizer.numberOfTapsRequired = 2;
+    doubleTapRecognizer.numberOfTouchesRequired = 1;
+    [scroll addGestureRecognizer:doubleTapRecognizer];
+    
+    UITapGestureRecognizer *twoFingerTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTwoFingerTapped:)];
+    twoFingerTapRecognizer.numberOfTapsRequired = 1;
+    twoFingerTapRecognizer.numberOfTouchesRequired = 2;
+    [scroll addGestureRecognizer:twoFingerTapRecognizer];
+    
+    scroll.delegate = self;
     scroll.layer.borderWidth = borderWidth;
     scroll.layer.borderColor = [UIColor whiteColor].CGColor;
     CGFloat scaleWidth = scroll.frame.size.width / scroll.contentSize.width;
     CGFloat scaleHeight = scroll.frame.size.height / scroll.contentSize.height;
     CGFloat minScale = MIN(scaleWidth, scaleHeight);
-    scroll.maximumZoomScale = 1.0f;
+    scroll.minimumZoomScale = 1.0f;
     scroll.zoomScale = minScale;
     scroll.maximumZoomScale = 2.0f;
     [scroll addSubview:imView];
@@ -683,6 +740,7 @@ float borderConer;
                              _movingCell.center = centerPoint;}
                          completion:^(BOOL finished){[_movingCell removeFromSuperview]; }];
     } else{
+        UIImage *img = [photoDict objectForKey:@"smallImage"];
         container.image = [photoDict objectForKey:@"smallImage"];
         CGPoint centerPoint = _movingCell.center;
         [_collage.collagePhotos addObject:[photoDict objectForKey:@"smallImage"]];
