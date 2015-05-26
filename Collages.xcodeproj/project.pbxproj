@@ -38,11 +38,13 @@
 		4A2127751AB463F600BF0F10 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2127291AB463F600BF0F10 /* UIWebView+AFNetworking.m */; };
 		4A555F661AB46EF500B6287A /* UserPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A555F651AB46EF500B6287A /* UserPhotosViewController.m */; };
 		4A555F691AB476C800B6287A /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A555F681AB476C800B6287A /* ImageCollectionViewCell.m */; };
+		4A6C84A41B0F851400286A09 /* AlbumContentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C84A31B0F851400286A09 /* AlbumContentsViewController.m */; };
+		4A6C84A71B0F88F900286A09 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6C84A61B0F88F900286A09 /* AssetsLibrary.framework */; };
+		4A6C84AA1B0FA1CC00286A09 /* ALAsset+ALAssetCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C84A91B0FA1CC00286A09 /* ALAsset+ALAssetCategory.m */; };
 		4A7E9AE41AE29586007CC382 /* collage_templates.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A7E9AE31AE29586007CC382 /* collage_templates.txt */; };
 		4A7E9AEA1AE2ED13007CC382 /* More.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 4A7E9AE91AE2ED13007CC382 /* More.tiff */; };
 		4A7E9AEF1AE3B4CB007CC382 /* ButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7E9AEE1AE3B4CB007CC382 /* ButtonsViewController.m */; };
 		4A7E9AF21AE3E56D007CC382 /* ChangingBordersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7E9AF11AE3E56D007CC382 /* ChangingBordersViewController.m */; };
-		4AB917DE1AB5B6A1000C69C8 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB917DD1AB5B6A1000C69C8 /* Accelerate.framework */; };
 		4AB917E11AB60A25000C69C8 /* SingInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB917E01AB60A25000C69C8 /* SingInViewController.m */; };
 		4AF97C231AF624A400FC6AE0 /* InstagramActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF97C221AF624A400FC6AE0 /* InstagramActivity.m */; };
 /* End PBXBuildFile section */
@@ -121,6 +123,11 @@
 		4A555F651AB46EF500B6287A /* UserPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPhotosViewController.m; sourceTree = "<group>"; };
 		4A555F671AB476C800B6287A /* ImageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionViewCell.h; sourceTree = "<group>"; };
 		4A555F681AB476C800B6287A /* ImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewCell.m; sourceTree = "<group>"; };
+		4A6C84A21B0F851400286A09 /* AlbumContentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumContentsViewController.h; sourceTree = "<group>"; };
+		4A6C84A31B0F851400286A09 /* AlbumContentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumContentsViewController.m; sourceTree = "<group>"; };
+		4A6C84A61B0F88F900286A09 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		4A6C84A81B0FA1CC00286A09 /* ALAsset+ALAssetCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+ALAssetCategory.h"; sourceTree = "<group>"; };
+		4A6C84A91B0FA1CC00286A09 /* ALAsset+ALAssetCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+ALAssetCategory.m"; sourceTree = "<group>"; };
 		4A7E9AE31AE29586007CC382 /* collage_templates.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = collage_templates.txt; path = ../collage_templates.txt; sourceTree = "<group>"; };
 		4A7E9AE91AE2ED13007CC382 /* More.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = More.tiff; sourceTree = "<group>"; };
 		4A7E9AED1AE3B4CB007CC382 /* ButtonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonsViewController.h; sourceTree = "<group>"; };
@@ -139,7 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AB917DE1AB5B6A1000C69C8 /* Accelerate.framework in Frameworks */,
+				4A6C84A71B0F88F900286A09 /* AssetsLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +163,7 @@
 		4A2126591AB2068500BF0F10 = {
 			isa = PBXGroup;
 			children = (
+				4A6C84A61B0F88F900286A09 /* AssetsLibrary.framework */,
 				4AB917DD1AB5B6A1000C69C8 /* Accelerate.framework */,
 				4A2126641AB2068500BF0F10 /* Collages */,
 				4A21267E1AB2068500BF0F10 /* CollagesTests */,
@@ -237,6 +245,10 @@
 				4A7E9AEE1AE3B4CB007CC382 /* ButtonsViewController.m */,
 				4A7E9AF01AE3E56D007CC382 /* ChangingBordersViewController.h */,
 				4A7E9AF11AE3E56D007CC382 /* ChangingBordersViewController.m */,
+				4A6C84A21B0F851400286A09 /* AlbumContentsViewController.h */,
+				4A6C84A31B0F851400286A09 /* AlbumContentsViewController.m */,
+				4A6C84A81B0FA1CC00286A09 /* ALAsset+ALAssetCategory.h */,
+				4A6C84A91B0FA1CC00286A09 /* ALAsset+ALAssetCategory.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -362,6 +374,7 @@
 				TargetAttributes = {
 					4A2126611AB2068500BF0F10 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 225AA7AUCM;
 					};
 					4A21267A1AB2068500BF0F10 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -437,12 +450,14 @@
 				4A21269D1AB4638400BF0F10 /* InstaUser.m in Sources */,
 				4A21266B1AB2068500BF0F10 /* AppDelegate.m in Sources */,
 				4A21276E1AB463F600BF0F10 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				4A6C84A41B0F851400286A09 /* AlbumContentsViewController.m in Sources */,
 				4A21272E1AB463F600BF0F10 /* AFSecurityPolicy.m in Sources */,
 				4A21269A1AB4638400BF0F10 /* Collage.m in Sources */,
 				4A2127301AB463F600BF0F10 /* AFURLRequestSerialization.m in Sources */,
 				4A2127751AB463F600BF0F10 /* UIWebView+AFNetworking.m in Sources */,
 				4A555F691AB476C800B6287A /* ImageCollectionViewCell.m in Sources */,
 				4A21276F1AB463F600BF0F10 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				4A6C84AA1B0FA1CC00286A09 /* ALAsset+ALAssetCategory.m in Sources */,
 				4A21272D1AB463F600BF0F10 /* AFNetworkReachabilityManager.m in Sources */,
 				4A2127311AB463F600BF0F10 /* AFURLResponseSerialization.m in Sources */,
 				4A2126681AB2068500BF0F10 /* main.m in Sources */,
@@ -567,9 +582,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Collages/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -577,9 +595,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Collages/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

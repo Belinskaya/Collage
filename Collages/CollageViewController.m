@@ -14,6 +14,7 @@
 #import "InstaEngine.h"
 #import "UIImageView+AFNetworking.h"
 #import "InstagramActivity.h"
+#import "AlbumContentsViewController.h"
 
 
 @interface CollageViewController ()
@@ -73,9 +74,6 @@ float borderConer;
     lpgr.delegate = self;
     [_selectedPhotoCV addGestureRecognizer: lpgr];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createNewImage:)];
-    tap.numberOfTapsRequired = 2;
-    [_collageFrame addGestureRecognizer:tap];
     [_collageFrame addSubview:_movingImage];
 
     
@@ -232,32 +230,6 @@ float borderConer;
 
 #pragma mark Gesture Recognizer Selectors
 
--(void)createNewImage:(UITapGestureRecognizer *) gesture{
-    if (_isFreeForm){
-        CGPoint locationPointInCollageView = [gesture locationInView:_collageFrame];
-        float width = (_collageFrame.bounds.size.width - 5)/2;
-        CGRect frame = CGRectMake(locationPointInCollageView.x, locationPointInCollageView.y, width, width);
-        UIImageView *newImage = [[UIImageView alloc] initWithFrame:frame];
-        newImage.layer.borderWidth = 5.0f;
-        newImage.layer.borderColor = [UIColor whiteColor].CGColor;
-        [newImage setUserInteractionEnabled:YES];
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveImageInCollage:)];
-        pan.delegate = self;
-        [newImage addGestureRecognizer:pan];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bringSubviewToFront:)];
-        tap.delegate = self;
-        [newImage addGestureRecognizer: tap];
-        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseFromLibrary:)];
-        doubleTap.numberOfTapsRequired = 2;
-        [newImage addGestureRecognizer:doubleTap];
-        [_collageFrame addSubview:newImage];
-        newImage.center = locationPointInCollageView;
-        _movingImage = newImage;
-        UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:@"Select image from" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"From library",@"From camera",  nil] ;
-        
-        [action showInView:self.view];
-    }
-}
 
 -(void) handleLongPress:(UILongPressGestureRecognizer *)longRecognizer{
     //позиция в collectionView
@@ -294,7 +266,7 @@ float borderConer;
                 CGPoint originInCollageView = [_collageFrame convertPoint:_movingCell.center fromView:self.view];
                 float width = (_collageFrame.bounds.size.width - 5)/2;
                 UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-                [self holdInContainer:imgView];
+                [self holdInContainer:imgView withIndex:photoIndex];
                 [self tuneImageView:imgView withCenterPont: originInCollageView];
                 [_collageFrame addSubview:imgView];
                 [_collageFrame bringSubviewToFront:imgView];
@@ -313,7 +285,7 @@ float borderConer;
                                 if( [y isKindOfClass:[UIImageView class]]){
                                     UIImageView *imgView = y;
                                     if (imgView.tag!=0){
-                                        [self holdInContainer:imgView];
+                                        [self holdInContainer:imgView withIndex: photoIndex];
                                         [_movingCell removeFromSuperview];
                                     }
                                     img_i+=1;
@@ -357,7 +329,8 @@ float borderConer;
                 CGRect frameRelativeToParent = [img convertRect:img.bounds
                                                          toView:_collageFrame];
                 if (CGRectContainsPoint( frameRelativeToParent , locationPointInView)){
-                    _movingImage = (UIImageView*)i;
+                    _movingImage = img;//(UIImageView*)i;
+                    _movingImage.tag = [_collage.collagePhotos indexOfObject: img.image];
                     [_collageFrame bringSubviewToFront:_movingImage];
                 }
             }
@@ -374,8 +347,8 @@ float borderConer;
         CGRect frameRelativeToParent = [_collageFrame convertRect:_collageFrame.bounds
                                                                toView:self.view];
         if (! CGRectContainsPoint( frameRelativeToParent , locationPointInSuperView)){
-            [_movingImage removeFromSuperview];
             [_collage.collagePhotos removeObjectAtIndex:_movingImage.tag];
+            [_movingImage removeFromSuperview];
         }
     }
 }
@@ -396,12 +369,17 @@ float borderConer;
 {
     switch (buttonIndex) {
         case 0:
-            {UIImagePickerController *pickerView = [[UIImagePickerController alloc] init];
+            {/*UIImagePickerController *pickerView = [[UIImagePickerController alloc] init];
                 pickerView.allowsEditing = YES;
                 pickerView.delegate = self;
                 [pickerView setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
                 [self presentViewController:pickerView animated:YES completion:nil];
+                break;*/
+                [self performSegueWithIdentifier:@"showPhotoLibrary" sender:self];
+                //AlbumContentsViewController *albumContent = [[AlbumContentsViewController alloc] init];
+                 //[self.parentViewController presentViewController:albumContent animated:YES completion:nil];
                 break;
+                //showPhotoLibrary
             }
         case 1:
         {
@@ -570,6 +548,7 @@ float borderConer;
         destView.background= image;
     }
 }
+
 #pragma mark Utilities
 
 -(void)addScrollsWithIndex: (NSInteger) index{
@@ -642,6 +621,12 @@ float borderConer;
     }
     scroll.layer.borderWidth = borderWidth;
     scroll.layer.borderColor = [UIColor whiteColor].CGColor;
+    CGFloat scaleWidth = scroll.frame.size.width / scroll.contentSize.width;
+    CGFloat scaleHeight = scroll.frame.size.height / scroll.contentSize.height;
+    CGFloat minScale = MIN(scaleWidth, scaleHeight);
+    scroll.maximumZoomScale = 1.0f;
+    scroll.zoomScale = minScale;
+    scroll.maximumZoomScale = 2.0f;
     [scroll addSubview:imView];
 }
 
@@ -665,12 +650,12 @@ float borderConer;
 }
 
 
--(void) holdInContainer: (UIImageView *) container{
+-(void) holdInContainer: (UIImageView *) container withIndex: (NSInteger) i{
     container.alpha = 0.0;
     container.image = _movingCell.image;
     
     //download big imgage's version
-    NSDictionary *photoDict = _collage.selectedPhotos[photoIndex];
+    NSDictionary *photoDict = _collage.selectedPhotos[i];
     id photo = [photoDict objectForKey:@"info"];
     if (photo != [NSNull null]){
         NSURLRequest *request = [NSURLRequest requestWithURL:[photo getStandartResolutionURL]];
@@ -698,7 +683,9 @@ float borderConer;
                              _movingCell.center = centerPoint;}
                          completion:^(BOOL finished){[_movingCell removeFromSuperview]; }];
     } else{
+        container.image = [photoDict objectForKey:@"smallImage"];
         CGPoint centerPoint = _movingCell.center;
+        [_collage.collagePhotos addObject:[photoDict objectForKey:@"smallImage"]];
         [UIView animateWithDuration: 0.5f
                          animations:^{ container.alpha = 1.0f;
                              CGRect frame = _movingCell.frame;
@@ -745,7 +732,7 @@ float borderConer;
             NSString *documentDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
             // *.igo is exclusive to instagram
             NSString *saveImagePath = [documentDirectory stringByAppendingPathComponent:@"Image.igo"];
-            NSLog(@"saveImagePath  %@", saveImagePath);
+            //NSLog(@"saveImagePath  %@", saveImagePath);
             NSData *imageData = UIImagePNGRepresentation([sharingItems objectAtIndex:0]);
             [imageData writeToFile:saveImagePath atomically:YES];
             

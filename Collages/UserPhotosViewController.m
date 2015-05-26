@@ -132,6 +132,11 @@ NSInteger photoCount = 200;
     //(expression) ? (if true) : (if false);
     NSString *cellIdentifier = (cv == _selectedPhotosCV)?  @"selectedPhoto" : @"UserPhoto";
     ImageCollectionViewCell *cell = (ImageCollectionViewCell *)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    if (cell.selected) {
+        [cell.selectedImageView setHidden:NO];
+    } else{
+        [cell.selectedImageView setHidden:YES];
+    }
     return cell;
 }
 
@@ -179,7 +184,8 @@ NSInteger photoCount = 200;
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     ImageCollectionViewCell *cell =  (ImageCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if (collectionView == _userPhotosCollectionView){
-        cell.layer.borderColor = [UIColor whiteColor].CGColor;
+        //cell.layer.borderColor = [UIColor whiteColor].CGColor;
+        [cell.selectedImageView setHidden:NO];
         InstaPhoto *photo = _usersPhotos[indexPath.row];
         NSDictionary *photoDictionary = @{@"info": photo, @"smallImage": cell.imageView.image};
         NSInteger index = [_collage.selectedPhotos count];
@@ -192,7 +198,8 @@ NSInteger photoCount = 200;
 -(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
     ImageCollectionViewCell *cell =  (ImageCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
     if (collectionView == _userPhotosCollectionView) {
-        cell.layer.borderColor = [UIColor clearColor].CGColor;
+        //cell.layer.borderColor = [UIColor clearColor].CGColor;
+        [cell.selectedImageView setHidden:YES];
         ImageCollectionViewCell *cell =  (ImageCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
         
         InstaPhoto *photo = _usersPhotos[indexPath.row];
