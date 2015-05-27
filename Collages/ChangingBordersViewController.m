@@ -44,6 +44,11 @@
     [cornerRadiusSlider addTarget:_delegate action:@selector(changeConerRadius:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:cornerRadiusSlider];
     
+    //-------------------------------Color Wheel----------------------------------
+    _colorWheel = [[ColorWheelView alloc] initWithFrame:CGRectMake(0, cornerRadiusSlider.frame.origin.y+30, 150.0f, 150.0f)];
+    [self.view addSubview:_colorWheel];
+    CGPoint newCenter = CGPointMake(self.preferredContentSize.width/2, _colorWheel.center.y);
+    _colorWheel.center = newCenter;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,7 +56,8 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) widthSliderChanged:(id)sender{
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
 }
 

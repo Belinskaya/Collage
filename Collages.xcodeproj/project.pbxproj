@@ -46,6 +46,8 @@
 		4A7E9AEF1AE3B4CB007CC382 /* ButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7E9AEE1AE3B4CB007CC382 /* ButtonsViewController.m */; };
 		4A7E9AF21AE3E56D007CC382 /* ChangingBordersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7E9AF11AE3E56D007CC382 /* ChangingBordersViewController.m */; };
 		4AB917E11AB60A25000C69C8 /* SingInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB917E01AB60A25000C69C8 /* SingInViewController.m */; };
+		4AD923121B161BFD008BB77A /* ColorWheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD9230F1B161BFD008BB77A /* ColorWheelView.m */; };
+		4AD923131B161BFD008BB77A /* MSColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD923111B161BFD008BB77A /* MSColorUtils.m */; };
 		4AF97C231AF624A400FC6AE0 /* InstagramActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF97C221AF624A400FC6AE0 /* InstagramActivity.m */; };
 /* End PBXBuildFile section */
 
@@ -137,6 +139,10 @@
 		4AB917DD1AB5B6A1000C69C8 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		4AB917DF1AB60A25000C69C8 /* SingInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingInViewController.h; sourceTree = "<group>"; };
 		4AB917E01AB60A25000C69C8 /* SingInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingInViewController.m; sourceTree = "<group>"; };
+		4AD9230E1B161BFD008BB77A /* ColorWheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorWheelView.h; sourceTree = "<group>"; };
+		4AD9230F1B161BFD008BB77A /* ColorWheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorWheelView.m; sourceTree = "<group>"; };
+		4AD923101B161BFD008BB77A /* MSColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSColorUtils.h; sourceTree = "<group>"; };
+		4AD923111B161BFD008BB77A /* MSColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSColorUtils.m; sourceTree = "<group>"; };
 		4AF97C211AF624A400FC6AE0 /* InstagramActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramActivity.h; sourceTree = "<group>"; };
 		4AF97C221AF624A400FC6AE0 /* InstagramActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramActivity.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -229,6 +235,10 @@
 		4A21268E1AB45FD200BF0F10 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4AD9230E1B161BFD008BB77A /* ColorWheelView.h */,
+				4AD9230F1B161BFD008BB77A /* ColorWheelView.m */,
+				4AD923101B161BFD008BB77A /* MSColorUtils.h */,
+				4AD923111B161BFD008BB77A /* MSColorUtils.m */,
 				4AB917DF1AB60A25000C69C8 /* SingInViewController.h */,
 				4AB917E01AB60A25000C69C8 /* SingInViewController.m */,
 				4A21268B1AB45D4600BF0F10 /* SearchUsersTableView.h */,
@@ -430,12 +440,14 @@
 			files = (
 				4AB917E11AB60A25000C69C8 /* SingInViewController.m in Sources */,
 				4A2127731AB463F600BF0F10 /* UIProgressView+AFNetworking.m in Sources */,
+				4AD923131B161BFD008BB77A /* MSColorUtils.m in Sources */,
 				4AF97C231AF624A400FC6AE0 /* InstagramActivity.m in Sources */,
 				4A2127741AB463F600BF0F10 /* UIRefreshControl+AFNetworking.m in Sources */,
 				4A2127321AB463F600BF0F10 /* AFURLSessionManager.m in Sources */,
 				4A21272F1AB463F600BF0F10 /* AFURLConnectionOperation.m in Sources */,
 				4A7E9AF21AE3E56D007CC382 /* ChangingBordersViewController.m in Sources */,
 				4A2127701AB463F600BF0F10 /* UIAlertView+AFNetworking.m in Sources */,
+				4AD923121B161BFD008BB77A /* ColorWheelView.m in Sources */,
 				4A2127721AB463F600BF0F10 /* UIImageView+AFNetworking.m in Sources */,
 				4A21272A1AB463F600BF0F10 /* AFHTTPRequestOperation.m in Sources */,
 				4A21268D1AB45D4600BF0F10 /* SearchUsersTableView.m in Sources */,

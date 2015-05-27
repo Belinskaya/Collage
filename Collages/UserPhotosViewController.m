@@ -166,8 +166,12 @@ NSInteger photoCount = 200;
      
      } else{
          NSDictionary *photoDict = [_collage.selectedPhotos objectAtIndex:indexPath.row];
-         UIImage *image = [photoDict objectForKey:@"smallImage"];
-         cell.image = image;
+         id i = [photoDict objectForKey:@"smallImage"];
+         if ([i isKindOfClass:[NSData class]]) {
+             cell.image = [UIImage imageWithData:(NSData *) i];
+         } else {
+             cell.image = (UIImage *) i;
+         }
      }
 
 }

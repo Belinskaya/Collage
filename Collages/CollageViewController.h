@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "ButtonsViewController.h"
 #import "ChangingBordersViewController.h"
+#import "ColorWheelView.h"
 
 @interface CollageViewController : UIViewController< UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout,
-     UIPopoverPresentationControllerDelegate, ButtonsDelegate, BordersDelegate,UIDocumentInteractionControllerDelegate, UIScrollViewDelegate>
+     UIPopoverPresentationControllerDelegate, ButtonsDelegate, BordersDelegate,UIDocumentInteractionControllerDelegate, UIScrollViewDelegate, ColorDelegate>
 
 
 @end

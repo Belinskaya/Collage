@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ColorWheelView.h"
 
 @protocol BordersDelegate <NSObject>
 @required
@@ -17,5 +18,6 @@
 @interface ChangingBordersViewController : UIViewController
 
 @property (nonatomic, weak) id<BordersDelegate> delegate;
+@property (strong, nonatomic) ColorWheelView *colorWheel;
 
 @end

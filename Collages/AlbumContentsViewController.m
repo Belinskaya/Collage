@@ -131,8 +131,12 @@
     else{
         
         NSDictionary *photoDict = [_collage.selectedPhotos objectAtIndex:indexPath.row];
-        UIImage *image = [photoDict objectForKey:@"smallImage"];
-        cell.image = image;
+        id i = [photoDict objectForKey:@"smallImage"];
+        if ([i isKindOfClass:[NSData class]]) {
+            cell.image = [UIImage imageWithData:(NSData *) i];
+        } else {
+            cell.image = (UIImage *) i;
+        }
     }
     return cell;
 }
@@ -167,11 +171,11 @@
         ALAsset *assetPhoto = [_photos objectAtIndex:indexPath.row];
         ALAssetRepresentation *assetRepresentation = [assetPhoto defaultRepresentation];
         
-        UIImage *fullScreenImage = [UIImage imageWithCGImage:[assetRepresentation fullScreenImage]
-                                                       scale:[assetRepresentation scale]
-                                                 orientation:UIImageOrientationUp];
+        Byte *buffer = (Byte*)malloc(assetRepresentation.size);
+        NSUInteger buffered = [assetRepresentation getBytes:buffer fromOffset:0.0 length: assetRepresentation.size error:nil];
+        NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
         //save photo
-        NSDictionary *photoDictionary = @{@"info": [NSNull null], @"smallImage": fullScreenImage};
+        NSDictionary *photoDictionary = @{@"info": [NSNull null], @"smallImage": data};
         NSInteger index = [_collage.selectedPhotos count];
         NSArray *arrayWithIndexPaths = @[[NSIndexPath indexPathForRow:index inSection:0]];
         [_collage.selectedPhotos addObject:photoDictionary];
@@ -184,15 +188,20 @@
     ImageCollectionViewCell *cell =  (ImageCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
     if (collectionView == _photosCollectionView) {
         [cell.selectedImageView setHidden:YES];
-        /*cell.layer.borderColor = [UIColor clearColor].CGColor;
-        ImageCollectionViewCell *cell =  (ImageCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
         
-        InstaPhoto *photo = _usersPhotos[indexPath.row];
-        NSDictionary *photoDictionary = @{@"info": photo, @"smallImage": cell.imageView.image};
+        ALAsset *assetPhoto = [_photos objectAtIndex:indexPath.row];
+        ALAssetRepresentation *assetRepresentation = [assetPhoto defaultRepresentation];
+        
+        Byte *buffer = (Byte*)malloc(assetRepresentation.size);
+        NSUInteger buffered = [assetRepresentation getBytes:buffer fromOffset:0.0 length: assetRepresentation.size error:nil];
+        NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+        
+        NSDictionary *photoDictionary = @{@"info": [NSNull null], @"smallImage": data};
         NSInteger index = [_collage.selectedPhotos indexOfObject:photoDictionary];
+        NSLog(@"Index %lu", index);
         NSArray *arrayWithIndexPaths = @[[NSIndexPath indexPathForRow:index inSection:0]];
         [_collage.selectedPhotos removeObject:photoDictionary];
-        [_selectedPhotosCV deleteItemsAtIndexPaths:arrayWithIndexPaths];*/
+        [_selectedPhotosCV deleteItemsAtIndexPaths:arrayWithIndexPaths];
     }
 }
 

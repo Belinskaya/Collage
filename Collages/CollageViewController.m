@@ -41,6 +41,7 @@
 @property (strong, nonatomic) ChangingBordersViewController *changingBorderController;
 @property (strong, nonatomic) InstaEngine *iEngine;
 @property (retain)UIDocumentInteractionController *documentController;
+@property (strong, nonatomic) UIColor *currentColor;
 @property (strong, nonatomic) UIImageView *zoomedImageView;
 
 @end
@@ -84,11 +85,12 @@ float borderConer;
 
     self.view.backgroundColor = mainBackgroundColor;
     
+    _currentColor = [UIColor whiteColor];
     _modesCV.backgroundColor = collectionViewColor;
     _selectedPhotoCV.backgroundColor = collectionViewColor;
     
     
-    _collageFrame.backgroundColor = mainBackgroundColor ;//[UIColor whiteColor];//lightGrayColor
+    _collageFrame.backgroundColor = [UIColor clearColor];//mainBackgroundColor ;//[UIColor whiteColor];//lightGrayColor
     _collageFrame.layer.borderColor = [UIColor whiteColor].CGColor;
     _collageFrame.layer.borderWidth = 1.0f;
     
@@ -200,7 +202,10 @@ float borderConer;
         pc.barButtonItem = _moreButton;
         pc.permittedArrowDirections = UIPopoverArrowDirectionAny;
         pc.delegate = self;
-        [self presentViewController: _changingBorderController animated:NO completion:nil];
+        [self presentViewController: _changingBorderController
+                           animated:NO
+                         completion: ^(void){
+                             _changingBorderController.colorWheel.delegate = self;}];
     } else {
         //The color picker popover is showing. Hide it.
         [_popover dismissPopoverAnimated:YES];
@@ -209,22 +214,46 @@ float borderConer;
 }
 
 -(void)changeBordersWidth:(UISlider *)sender{
-    for (id i in _collageFrame.subviews) {
-        if( [i isKindOfClass:[UIScrollView class]]){
-            UIScrollView *scroll= i;
-            scroll.layer.borderWidth = sender.value;
+    borderWidth = sender.value;
+    if (_isFreeForm){
+        _collageFrame.layer.borderWidth = borderWidth;
+    } else{
+        for (id i in _collageFrame.subviews) {
+            if( [i isKindOfClass:[UIScrollView class]]){
+                UIScrollView *scroll= i;
+                scroll.layer.borderWidth = borderWidth;
+            }
         }
     }
-    borderWidth = sender.value;
 }
 
 -(void) changeConerRadius:(UISlider *)sender{
-    for (id i in _collageFrame.subviews) {
-        if( [i isKindOfClass:[UIScrollView class]]){
-            UIScrollView *scroll= i;
-            float maxRadius = scroll.frame.size.height/2;
-            borderConer = sender.value*maxRadius/100;
-            scroll.layer.cornerRadius = borderConer;
+    if (_isFreeForm){
+        borderConer = sender.value*(_collageFrame.bounds.size.height/2)/100;
+        _collageFrame.layer.cornerRadius = borderConer;
+    }else{
+        for (id i in _collageFrame.subviews) {
+            if( [i isKindOfClass:[UIScrollView class]]){
+                UIScrollView *scroll= i;
+                float maxRadius = scroll.frame.size.height/2;
+                borderConer = sender.value*maxRadius/100;
+                scroll.layer.cornerRadius = borderConer;
+            }
+        }
+    }
+}
+
+-(void) changeColor:(UIColor *)sender{
+    _currentColor = sender;
+    if (_isFreeForm) {
+        _collageFrame.layer.borderColor = _currentColor.CGColor;
+    } else
+    {
+        for (id i in _collageFrame.subviews){
+            if( [i isKindOfClass:[UIScrollView class]]){
+                UIScrollView *scroll = (UIScrollView *) i;
+                scroll.layer.borderColor = _currentColor.CGColor;
+            }
         }
     }
 }
@@ -244,7 +273,13 @@ float borderConer;
         photoIndex = indexPathOfMovingCell.row;
         
         NSDictionary *photoDict = [_collage.selectedPhotos objectAtIndex:indexPathOfMovingCell.row];
-        UIImage *image = [photoDict objectForKey:@"smallImage"];
+        UIImage *image = [[UIImage alloc] init];
+        id i = [photoDict objectForKey:@"smallImage"];
+        if ([i isKindOfClass:[NSData class]]) {
+            image = [UIImage imageWithData:(NSData *) i];
+        } else {
+            image = (UIImage *) i;
+        }
         CGRect frame = CGRectMake(locationPointInView.x, locationPointInView.y, 150.0f, 150.0f);
         _movingCell = [[UIImageView alloc] initWithFrame:frame];
         _movingCell.image = image;
@@ -278,7 +313,6 @@ float borderConer;
                         UIScrollView *tmpScroll = (UIScrollView *)i;
                         CGRect frameRelativeToParent= [tmpScroll convertRect: tmpScroll.bounds
                                                                                            toView:self.view];
-                        NSLog(@"c_w = %f, c_h = %f", tmpScroll.contentSize.width, tmpScroll.contentSize.height);
                         if (CGRectContainsPoint( frameRelativeToParent, _movingCell.center)){
                             for (id y in tmpScroll.subviews){
                                 if( [y isKindOfClass:[UIImageView class]]){
@@ -286,6 +320,7 @@ float borderConer;
                                     if (imgView.tag!=0){
                                         [self holdInContainer:imgView withIndex: photoIndex];
                                         [_movingCell removeFromSuperview];
+                                        [tmpScroll setNeedsLayout];
                                     }
                                 }
                             }
@@ -360,7 +395,6 @@ float borderConer;
 }
 
 - (void)scrollViewDoubleTapped:(UITapGestureRecognizer*)recognizer {
-    NSLog(@"scrollViewDoubleTapped");
     UIScrollView *scroll = (UIScrollView *) recognizer.view;
     for (id y in scroll.subviews){
         if( [y isKindOfClass:[UIImageView class]]){
@@ -379,8 +413,6 @@ float borderConer;
     
     CGFloat w = scrollViewSize.width / newZoomScale;
     CGFloat h = scrollViewSize.height / newZoomScale;
-    
-    NSLog(@"w = %f, h = %f, newZoomScale = %f", w, h, newZoomScale);
     CGFloat x = pointInView.x - (w / 2.0f);
     CGFloat y = pointInView.y - (h / 2.0f);
     
@@ -391,11 +423,11 @@ float borderConer;
 }
 
 - (void)scrollViewTwoFingerTapped:(UITapGestureRecognizer*)recognizer {
-    NSLog(@"scrollViewTwoFingerTapped");
+    UIScrollView *scroll = (UIScrollView *) recognizer.view;
     // Zoom out slightly, capping at the minimum zoom scale specified by the scroll view
-    /*CGFloat newZoomScale = self.scrollView.zoomScale / 1.5f;
-    newZoomScale = MAX(newZoomScale, self.scrollView.minimumZoomScale);
-    [self.scrollView setZoomScale:newZoomScale animated:YES];*/
+    CGFloat newZoomScale = scroll.zoomScale / 1.5f;
+    newZoomScale = MAX(newZoomScale, scroll.minimumZoomScale);
+    [scroll setZoomScale:newZoomScale animated:YES];
 }
 
 #pragma mark - ActionSheet delegates
@@ -448,18 +480,7 @@ float borderConer;
 #pragma mark - ScrollView delegates
 
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    // Return the view that you want to zoom
-    UIImageView *returnImageView = [[UIImageView alloc] init];
-    for (id y in scrollView.subviews){
-        if( [y isKindOfClass:[UIImageView class]]){
-            UIImageView *imgView = y;
-            if (imgView.tag!=0){
-                returnImageView = imgView;
-            }
-        }
-    }
-    return returnImageView;
-    //return  _zoomedImageView;
+    return  _zoomedImageView;
 }
 
 #pragma mark UICollectionView - sources
@@ -504,8 +525,12 @@ float borderConer;
         }
     } else {
         NSDictionary *photoDict = [_collage.selectedPhotos objectAtIndex:indexPath.row];
-        UIImage *image = [photoDict objectForKey:@"smallImage"];
-        cell.imageView.image = image;
+        id i = [photoDict objectForKey:@"smallImage"];
+        if ([i isKindOfClass:[NSData class]]) {
+            cell.image = [UIImage imageWithData:(NSData *) i];
+        } else {
+            cell.image = (UIImage *) i;
+        }
     }
     return cell;
 }
@@ -520,12 +545,16 @@ float borderConer;
             _isFreeForm = YES;
             [self deleteScrolls];
             [self reesteblishImageViews];
+            _collageFrame.layer.borderWidth = borderWidth;
+            _collageFrame.layer.cornerRadius = 0.0f;
         } else
         {
             _isFreeForm=NO;
             [self deleteScrolls];
             [self deleteUIImageView];
             [self addScrollsWithIndex:indexPath.row];
+            _collageFrame.layer.borderWidth = 0.0f;
+            _collageFrame.layer.cornerRadius = 0.0f;
         }
         cell.layer.borderWidth = 2.0f;
         cell.layer.borderColor = self.navigationController.navigationBar.tintColor.CGColor;
@@ -676,8 +705,10 @@ float borderConer;
     [scroll addGestureRecognizer:twoFingerTapRecognizer];
     
     scroll.delegate = self;
+    //[scroll setScrollEnabled:YES];
+    //scroll.clipsToBounds = YES;
     scroll.layer.borderWidth = borderWidth;
-    scroll.layer.borderColor = [UIColor whiteColor].CGColor;
+    scroll.layer.borderColor = _currentColor.CGColor; //[UIColor whiteColor].CGColor;
     CGFloat scaleWidth = scroll.frame.size.width / scroll.contentSize.width;
     CGFloat scaleHeight = scroll.frame.size.height / scroll.contentSize.height;
     CGFloat minScale = MIN(scaleWidth, scaleHeight);
@@ -740,10 +771,16 @@ float borderConer;
                              _movingCell.center = centerPoint;}
                          completion:^(BOOL finished){[_movingCell removeFromSuperview]; }];
     } else{
-        UIImage *img = [photoDict objectForKey:@"smallImage"];
-        container.image = [photoDict objectForKey:@"smallImage"];
+        UIImage *img =[[UIImage alloc] init];
+        id i = [photoDict objectForKey:@"smallImage"];
+        if ([i isKindOfClass:[NSData class]]) {
+            img = [UIImage imageWithData:(NSData *) i];
+        } else {
+            img = (UIImage *) i;
+        }
+        container.image = img;
         CGPoint centerPoint = _movingCell.center;
-        [_collage.collagePhotos addObject:[photoDict objectForKey:@"smallImage"]];
+        [_collage.collagePhotos addObject:img];
         [UIView animateWithDuration: 0.5f
                          animations:^{ container.alpha = 1.0f;
                              CGRect frame = _movingCell.frame;
@@ -790,7 +827,6 @@ float borderConer;
             NSString *documentDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
             // *.igo is exclusive to instagram
             NSString *saveImagePath = [documentDirectory stringByAppendingPathComponent:@"Image.igo"];
-            //NSLog(@"saveImagePath  %@", saveImagePath);
             NSData *imageData = UIImagePNGRepresentation([sharingItems objectAtIndex:0]);
             [imageData writeToFile:saveImagePath atomically:YES];
             
