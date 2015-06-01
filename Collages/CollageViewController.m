@@ -319,6 +319,7 @@ float borderConer;
                                     UIImageView *imgView = y;
                                     if (imgView.tag!=0){
                                         [self holdInContainer:imgView withIndex: photoIndex];
+                                        tmpScroll.contentSize = imgView.bounds.size;
                                         [_movingCell removeFromSuperview];
                                         [tmpScroll setNeedsLayout];
                                     }
@@ -500,17 +501,25 @@ float borderConer;
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ImageCollectionViewCell *cell = (ImageCollectionViewCell *)[cv dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
     if (cv == _modesCV){
-        [cell.imageView setHidden:YES];
-        UIView *freeForm = [[UIView alloc] initWithFrame:cell.bounds];
-        freeForm.backgroundColor = [UIColor clearColor];
-        freeForm.layer.borderWidth = 2.0f;
-        freeForm.layer.borderColor = [UIColor whiteColor].CGColor;
-        if (indexPath.row == 0) {
-            [cell addSubview:freeForm];
+        if(cell.isSelected){
+            cell.layer.borderWidth = 2.0f;
+            cell.layer.borderColor = self.navigationController.navigationBar.tintColor.CGColor;
         } else {
+            cell.layer.borderWidth = 0.0f;
+        }
+        [cell.imageView setHidden:YES];
+        cell.viewForDrawing.frame = cell.bounds;
+        //UIView *freeForm = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.viewForDrawing.backgroundColor = [UIColor clearColor];
+        cell.viewForDrawing.layer.borderWidth = 2.0f;
+        cell.viewForDrawing.layer.borderColor = [UIColor whiteColor].CGColor;
+        cell.viewForDrawing.clearsContextBeforeDrawing = YES;
+        [cell.viewForDrawing.layer setSublayers:nil];
+        if (indexPath.row != 0) {
             NSDictionary *dict = [_templates objectAtIndex: indexPath.row-1];
             NSArray *templ_array = [dict objectForKey:@"small_template"];
             UIBezierPath *path = [UIBezierPath bezierPath];
+            
             for (NSDictionary *d in templ_array) {
                 [path moveToPoint:CGPointMake( [[d objectForKey:@"start_x"] floatValue], [[d objectForKey:@"start_y"] floatValue])];
                 [path addLineToPoint:CGPointMake( [[d objectForKey:@"end_x"] floatValue], [[d objectForKey:@"end_y"] floatValue])];
@@ -520,8 +529,8 @@ float borderConer;
             shapeLayer.strokeColor = [[UIColor whiteColor] CGColor];
             shapeLayer.lineWidth = 2.0;
             shapeLayer.fillColor = [[UIColor clearColor] CGColor];
-            [freeForm.layer addSublayer:shapeLayer];
-            [cell addSubview:freeForm];
+            [cell.viewForDrawing.layer addSublayer:shapeLayer];
+            [cell setNeedsDisplay];
         }
     } else {
         NSDictionary *photoDict = [_collage.selectedPhotos objectAtIndex:indexPath.row];
@@ -659,6 +668,16 @@ float borderConer;
     for (UIImage *img in _collage.collagePhotos){
         float width = (_collageFrame.bounds.size.width - 5)/2;
         UIImageView *newImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+        float s = 1.0f;
+        if (img.size.height> img.size.width) {
+            s = img.size.height/img.size.width;
+            CGRect newRect = CGRectMake(newImageView.frame.origin.x, newImageView.frame.origin.y, newImageView.frame.size.width, newImageView.frame.size.height*s);
+            newImageView.frame = newRect;
+        } else{
+            s = img.size.width/img.size.height;
+            CGRect newRect = CGRectMake(newImageView.frame.origin.x, newImageView.frame.origin.y, newImageView.frame.size.width*s, newImageView.frame.size.height);
+            newImageView.frame = newRect;
+        }
         newImageView.image = img;
         [self tuneImageView:newImageView withCenterPont:CGPointMake(x, y)];
         [_collageFrame addSubview:newImageView];
@@ -687,7 +706,22 @@ float borderConer;
     imView.tag=101;
     //in case wrong array index
     @try {
-        imView.image = [_collage.collagePhotos objectAtIndex:index];
+        float s = 1.0f;
+        UIImage *img = [_collage.collagePhotos objectAtIndex:index];
+        NSLog(@"OLD SIZE w=%f, h=%f", imView.frame.size.width, imView.frame.size.height);
+        if (img.size.height> img.size.width) {
+            s = img.size.height/img.size.width;
+            CGRect newRect = CGRectMake(imView.frame.origin.x, imView.frame.origin.y, imView.frame.size.width, imView.frame.size.height*s);
+            imView.frame = newRect;
+        } else{
+            s = img.size.width/img.size.height;
+            CGRect newRect = CGRectMake(imView.frame.origin.x, imView.frame.origin.y, imView.frame.size.width*s, imView.frame.size.height);
+            imView.frame = newRect;
+        }
+        NSLog(@"NEW SIZE w=%f, h=%f", imView.frame.size.width, imView.frame.size.height);
+        scroll.contentSize = imView.frame.size;
+        imView.image = img;
+        
     }
     @catch (NSException *exception) {
         //do nothing
@@ -777,6 +811,16 @@ float borderConer;
             img = [UIImage imageWithData:(NSData *) i];
         } else {
             img = (UIImage *) i;
+        }
+        float s = 1.0f;
+        if (img.size.height> img.size.width) {
+            s = img.size.height/img.size.width;
+            CGRect newRect = CGRectMake(container.frame.origin.x, container.frame.origin.y, container.frame.size.width, container.frame.size.height*s);
+            container.frame = newRect;
+        } else{
+            s = img.size.width/img.size.height;
+            CGRect newRect = CGRectMake(container.frame.origin.x, container.frame.origin.y, container.frame.size.width*s, container.frame.size.height);
+            container.frame = newRect;
         }
         container.image = img;
         CGPoint centerPoint = _movingCell.center;

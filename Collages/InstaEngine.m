@@ -23,7 +23,7 @@ static NSString *const client_id = @"267939c79a88482e8a99817dd74cde54";
 
 
 static NSString *const redirectUri = @"http://instagram.com";
-static NSString *const authUrlString = @"https://api.instagram.com/oauth/authorize/";
+static NSString *const authUrlString = @"https://instagram.com/oauth/authorize/";
 static NSString *const searchPeopleString = @"https://api.instagram.com/v1/users/search?q=";
 static NSString *const recentPhotoString =@"https://api.instagram.com/v1/users/";
 NSString *token;
@@ -85,10 +85,11 @@ static InstaEngine *_sharedInstance = nil;
 
 -(NSURL *) authUrl{
     NSString *fullAuthUrlString = [[NSString alloc]
-                                   initWithFormat:@"%@/?client_id=%@&redirect_uri=%@&response_type=token&display=touch",
+                                   initWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token&display=touch",
                                    authUrlString,
                                    client_id,
                                    redirectUri  ];
+    NSLog(@"%@", fullAuthUrlString );
     NSURL *authUrl = [NSURL URLWithString:fullAuthUrlString];
     return authUrl;
 }

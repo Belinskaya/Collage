@@ -10,7 +10,8 @@
 
 @interface ImageCollectionViewCell : UICollectionViewCell
 @property (strong, nonatomic) UIImage *image;
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIView *viewForDrawing;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIImageView *selectedImageView;
 
 @end

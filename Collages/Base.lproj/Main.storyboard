@@ -78,6 +78,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wKD-aS-02U">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QO8-EA-NmZ">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 </imageView>
@@ -86,12 +90,17 @@
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="QO8-EA-NmZ" secondAttribute="bottom" id="6yS-oc-3Yf"/>
+                                            <constraint firstItem="wKD-aS-02U" firstAttribute="top" secondItem="CdD-FM-8Lm" secondAttribute="top" id="AIP-yh-Owb"/>
+                                            <constraint firstAttribute="trailing" secondItem="wKD-aS-02U" secondAttribute="trailing" id="ODH-K1-d5Y"/>
+                                            <constraint firstItem="wKD-aS-02U" firstAttribute="leading" secondItem="CdD-FM-8Lm" secondAttribute="leading" id="Whd-V2-b5t"/>
                                             <constraint firstAttribute="trailing" secondItem="QO8-EA-NmZ" secondAttribute="trailing" id="jHs-Kk-sL8"/>
                                             <constraint firstItem="QO8-EA-NmZ" firstAttribute="top" secondItem="CdD-FM-8Lm" secondAttribute="top" id="jPv-Fg-5qB"/>
                                             <constraint firstItem="QO8-EA-NmZ" firstAttribute="leading" secondItem="CdD-FM-8Lm" secondAttribute="leading" id="qwb-VC-bLU"/>
+                                            <constraint firstAttribute="bottom" secondItem="wKD-aS-02U" secondAttribute="bottom" id="rCO-LQ-PZS"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="QO8-EA-NmZ" id="sCO-0a-owM"/>
+                                            <outlet property="viewForDrawing" destination="wKD-aS-02U" id="bYA-Og-Zlr"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

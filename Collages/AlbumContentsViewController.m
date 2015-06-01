@@ -32,6 +32,13 @@
     _iEngine = [InstaEngine sharedInstance];
     _collage = [Collage sharedInstance];
     
+    UIColor *collectionViewColor = [UIColor colorWithRed:52.0f/255.0f green:73.0f/255.0f blue:94.0f/255.0f alpha:1.0f];
+    UIColor *mainBackgroundColor = [UIColor colorWithRed:103.0f/255.0f green:128.0f/255.0f blue:159.0f/255.0f alpha:1.0f];
+    
+    self.view.backgroundColor = mainBackgroundColor;
+    self.selectedPhotosCV.backgroundColor = collectionViewColor;
+    self.photosCollectionView.backgroundColor = [UIColor clearColor];
+    
     if (self.photos == nil) {
         _photos = [[NSMutableArray alloc] init];
     } else{
@@ -74,7 +81,8 @@
             ALAssetsGroupEnumerationResultsBlock assetsEnumerationBlock = ^(ALAsset *result, NSUInteger index, BOOL *stop) {
                 
                 if (result) {
-                    [self.photos addObject:result];
+                    [self.photos insertObject:result atIndex:0];
+                    [_photosCollectionView reloadData];
                 }
             };
             [group enumerateAssetsUsingBlock:assetsEnumerationBlock];
@@ -90,11 +98,14 @@
 }
 
 -(void) viewDidAppear:(BOOL)animated{
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
-    //self.assets = [tmpAssets sortedArrayUsingDescriptors:@[sort]];
-    NSMutableArray *tmp=[self.photos copy];
-    self.photos = (NSMutableArray *)[tmp sortedArrayUsingDescriptors:@[sort]];
     [super viewDidAppear:animated];
+
+    /*NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
+    //NSArray *newArray = [NSMutableArray arrayWithArray:oldArray];
+    NSMutableArray *tmp=[NSMutableArray arrayWithArray:self.photos];
+    NSMutableArray *tmpMA =  (NSMutableArray *)[tmp sortedArrayUsingDescriptors:@[sort]];
+    self.photos = tmpMA;
+    //[self.photos sortedArrayUsingDescriptors:@[sort]];*/
     [_photosCollectionView reloadData];
 }
 
@@ -198,7 +209,6 @@
         
         NSDictionary *photoDictionary = @{@"info": [NSNull null], @"smallImage": data};
         NSInteger index = [_collage.selectedPhotos indexOfObject:photoDictionary];
-        NSLog(@"Index %lu", index);
         NSArray *arrayWithIndexPaths = @[[NSIndexPath indexPathForRow:index inSection:0]];
         [_collage.selectedPhotos removeObject:photoDictionary];
         [_selectedPhotosCV deleteItemsAtIndexPaths:arrayWithIndexPaths];
