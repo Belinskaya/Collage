@@ -11,6 +11,7 @@
 @protocol ButtonsDelegate <NSObject>
 @required
 -(void)showBordersPopover:(id) sender;
+-(void)aboutClicked:(id) sender;
 @end
 
 @interface ButtonsViewController : UIViewController

@@ -48,6 +48,9 @@
 		4AB917E11AB60A25000C69C8 /* SingInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB917E01AB60A25000C69C8 /* SingInViewController.m */; };
 		4AD923121B161BFD008BB77A /* ColorWheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD9230F1B161BFD008BB77A /* ColorWheelView.m */; };
 		4AD923131B161BFD008BB77A /* MSColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD923111B161BFD008BB77A /* MSColorUtils.m */; };
+		4AE8DF1B1B2061B0000190DF /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8DF1A1B2061B0000190DF /* AboutViewController.m */; };
+		4AE8DF1D1B2069A1000190DF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE8DF1C1B2069A1000190DF /* MessageUI.framework */; };
+		4AE8DF1F1B20B352000190DF /* BOOKOS.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 4AE8DF1E1B20B352000190DF /* BOOKOS.TTF */; };
 		4AF97C231AF624A400FC6AE0 /* InstagramActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF97C221AF624A400FC6AE0 /* InstagramActivity.m */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +146,10 @@
 		4AD9230F1B161BFD008BB77A /* ColorWheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorWheelView.m; sourceTree = "<group>"; };
 		4AD923101B161BFD008BB77A /* MSColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSColorUtils.h; sourceTree = "<group>"; };
 		4AD923111B161BFD008BB77A /* MSColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSColorUtils.m; sourceTree = "<group>"; };
+		4AE8DF191B2061B0000190DF /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		4AE8DF1A1B2061B0000190DF /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		4AE8DF1C1B2069A1000190DF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		4AE8DF1E1B20B352000190DF /* BOOKOS.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = BOOKOS.TTF; sourceTree = "<group>"; };
 		4AF97C211AF624A400FC6AE0 /* InstagramActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramActivity.h; sourceTree = "<group>"; };
 		4AF97C221AF624A400FC6AE0 /* InstagramActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramActivity.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AE8DF1D1B2069A1000190DF /* MessageUI.framework in Frameworks */,
 				4A6C84A71B0F88F900286A09 /* AssetsLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,6 +177,7 @@
 		4A2126591AB2068500BF0F10 = {
 			isa = PBXGroup;
 			children = (
+				4AE8DF1C1B2069A1000190DF /* MessageUI.framework */,
 				4A6C84A61B0F88F900286A09 /* AssetsLibrary.framework */,
 				4AB917DD1AB5B6A1000C69C8 /* Accelerate.framework */,
 				4A2126641AB2068500BF0F10 /* Collages */,
@@ -208,6 +217,7 @@
 		4A2126651AB2068500BF0F10 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4AE8DF1E1B20B352000190DF /* BOOKOS.TTF */,
 				4A7E9AE31AE29586007CC382 /* collage_templates.txt */,
 				4A2126661AB2068500BF0F10 /* Info.plist */,
 				4A2126671AB2068500BF0F10 /* main.m */,
@@ -259,6 +269,8 @@
 				4A6C84A31B0F851400286A09 /* AlbumContentsViewController.m */,
 				4A6C84A81B0FA1CC00286A09 /* ALAsset+ALAssetCategory.h */,
 				4A6C84A91B0FA1CC00286A09 /* ALAsset+ALAssetCategory.m */,
+				4AE8DF191B2061B0000190DF /* AboutViewController.h */,
+				4AE8DF1A1B2061B0000190DF /* AboutViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -421,6 +433,7 @@
 				4A2126761AB2068500BF0F10 /* LaunchScreen.xib in Resources */,
 				4A7E9AEA1AE2ED13007CC382 /* More.tiff in Resources */,
 				4A2126731AB2068500BF0F10 /* Images.xcassets in Resources */,
+				4AE8DF1F1B20B352000190DF /* BOOKOS.TTF in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +469,7 @@
 				4A21269C1AB4638400BF0F10 /* InstaPhoto.m in Sources */,
 				4A21269B1AB4638400BF0F10 /* InstaEngine.m in Sources */,
 				4A21272C1AB463F600BF0F10 /* AFHTTPSessionManager.m in Sources */,
+				4AE8DF1B1B2061B0000190DF /* AboutViewController.m in Sources */,
 				4A7E9AEF1AE3B4CB007CC382 /* ButtonsViewController.m in Sources */,
 				4A21266E1AB2068500BF0F10 /* CollageViewController.m in Sources */,
 				4A555F661AB46EF500B6287A /* UserPhotosViewController.m in Sources */,
@@ -600,6 +614,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -613,6 +628,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

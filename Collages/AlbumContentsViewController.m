@@ -182,8 +182,8 @@
         ALAsset *assetPhoto = [_photos objectAtIndex:indexPath.row];
         ALAssetRepresentation *assetRepresentation = [assetPhoto defaultRepresentation];
         
-        Byte *buffer = (Byte*)malloc(assetRepresentation.size);
-        NSUInteger buffered = [assetRepresentation getBytes:buffer fromOffset:0.0 length: assetRepresentation.size error:nil];
+        Byte *buffer = (Byte*)malloc( (unsigned long) assetRepresentation.size);
+        NSUInteger buffered = [assetRepresentation getBytes:buffer fromOffset:0.0 length: (NSUInteger)assetRepresentation.size error:nil];
         NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
         //save photo
         NSDictionary *photoDictionary = @{@"info": [NSNull null], @"smallImage": data};
@@ -203,8 +203,8 @@
         ALAsset *assetPhoto = [_photos objectAtIndex:indexPath.row];
         ALAssetRepresentation *assetRepresentation = [assetPhoto defaultRepresentation];
         
-        Byte *buffer = (Byte*)malloc(assetRepresentation.size);
-        NSUInteger buffered = [assetRepresentation getBytes:buffer fromOffset:0.0 length: assetRepresentation.size error:nil];
+        Byte *buffer = (Byte*)malloc( (unsigned long) assetRepresentation.size);
+        NSUInteger buffered = [assetRepresentation getBytes:buffer fromOffset:0.0 length: (NSUInteger)assetRepresentation.size error:nil];
         NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
         
         NSDictionary *photoDictionary = @{@"info": [NSNull null], @"smallImage": data};

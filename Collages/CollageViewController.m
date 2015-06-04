@@ -213,6 +213,13 @@ float borderConer;
     }
 }
 
+-(void) aboutClicked:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    //[_popover dismissPopoverAnimated:YES];
+    _popover = nil;
+    [self performSegueWithIdentifier:@"aboutSegue" sender:self];
+}
+
 -(void)changeBordersWidth:(UISlider *)sender{
     borderWidth = sender.value;
     if (_isFreeForm){

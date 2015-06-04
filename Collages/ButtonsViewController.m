@@ -17,8 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.preferredContentSize = CGSizeMake(100.0f, 100.0f);
-    
+    self.preferredContentSize = CGSizeMake(100.0f, 80.0f);
+    //-------------------------------BORDERS-------------------------------
     UIButton *borderButton = [UIButton buttonWithType: UIButtonTypeSystem];//[[UIButton alloc] initWithFrame:CGRectMake(10, 10, 40, 30)];
     [borderButton addTarget:_delegate
                      action:@selector(showBordersPopover:)
@@ -27,6 +27,16 @@
     borderButton.frame = CGRectMake (0,0, 100.0f, 40.0f);
     [self.view addSubview:borderButton];
     [self drawLineWithStartX:0 StartY:40.0f EndX:100.0f EndY:40.0f];
+    
+    //----------------------------------ABOUT--------------------------------------
+    UIButton *aboutButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [aboutButton addTarget:_delegate
+                    action:@selector(aboutClicked:)
+          forControlEvents:UIControlEventTouchUpInside];
+    [aboutButton setTitle:@"About" forState:UIControlStateNormal];
+    aboutButton.frame = CGRectMake (0,40, 100.0f, 40.0f);
+    [self.view addSubview:aboutButton];
+    
     // Do any additional setup after loading the view.
 }
 

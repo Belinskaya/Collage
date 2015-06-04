@@ -4,6 +4,14 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="BOOKOS.TTF">
+            <string>BookmanOldStyle</string>
+            <string>BookmanOldStyle</string>
+            <string>BookmanOldStyle</string>
+            <string>BookmanOldStyle</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Collage-->
         <scene sceneID="ufC-wZ-h7g">
@@ -170,11 +178,112 @@
                         <segue destination="tuO-vj-J5c" kind="show" identifier="openSearch" id="10i-X8-naw"/>
                         <segue destination="BCO-hU-Lal" kind="show" identifier="SignIn" id="Lbt-25-Q27"/>
                         <segue destination="sSP-wL-o8G" kind="show" identifier="showPhotoLibrary" id="myA-xY-74O"/>
+                        <segue destination="3sk-WE-xv8" kind="show" identifier="aboutSegue" id="mUZ-wh-OIy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2067" y="452"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="yz1-yl-2ez">
+            <objects>
+                <viewController id="3sk-WE-xv8" customClass="AboutViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dwz-pr-9gH"/>
+                        <viewControllerLayoutGuide type="bottom" id="H5d-iW-xrE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tZp-88-3l9">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wae-Hg-HK1">
+                                <rect key="frame" x="149" y="144" width="302" height="166"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="180x180_v3" translatesAutoresizingMaskIntoConstraints="NO" id="qIS-bT-7Xz">
+                                        <rect key="frame" x="18" y="33" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="TND-wA-A1n"/>
+                                            <constraint firstAttribute="height" constant="100" id="uyw-BQ-8Iv"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3h-gO-gku">
+                                        <rect key="frame" x="128" y="50" width="174" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="41" id="E0Z-6p-uJl"/>
+                                            <constraint firstAttribute="width" constant="174" id="uRF-VW-zO1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BookmanOldStyle" family="Bookman Old Style" pointSize="35"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f15-bY-0Hf">
+                                        <rect key="frame" x="128" y="99" width="96" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="Va9-jh-bD7"/>
+                                            <constraint firstAttribute="width" constant="96" id="ows-0z-Rtf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BookmanOldStyle" family="Bookman Old Style" pointSize="13"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.76000000000000001" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="qIS-bT-7Xz" secondAttribute="centerY" id="2EI-3B-YJn"/>
+                                    <constraint firstAttribute="centerX" secondItem="qIS-bT-7Xz" secondAttribute="centerX" constant="83" id="Heg-EA-fv5"/>
+                                    <constraint firstItem="f15-bY-0Hf" firstAttribute="top" secondItem="v3h-gO-gku" secondAttribute="bottom" constant="8" id="QdD-mx-CkN"/>
+                                    <constraint firstItem="v3h-gO-gku" firstAttribute="top" secondItem="Wae-Hg-HK1" secondAttribute="top" constant="50" id="R5V-q2-6Cq"/>
+                                    <constraint firstAttribute="height" constant="166" id="aFs-JX-Wzw"/>
+                                    <constraint firstItem="f15-bY-0Hf" firstAttribute="leading" secondItem="qIS-bT-7Xz" secondAttribute="trailing" constant="10" id="bNU-c9-Sta"/>
+                                    <constraint firstItem="v3h-gO-gku" firstAttribute="leading" secondItem="qIS-bT-7Xz" secondAttribute="trailing" constant="10" id="hVE-MV-1Go"/>
+                                    <constraint firstItem="qIS-bT-7Xz" firstAttribute="leading" secondItem="Wae-Hg-HK1" secondAttribute="leading" constant="18" id="t7T-zA-Wav"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgo-KU-nKv">
+                                <rect key="frame" x="149" y="405" width="302" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="8r9-j6-q7X"/>
+                                    <constraint firstAttribute="width" constant="302" id="pP0-6r-CEn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BookmanOldStyle" family="Bookman Old Style" pointSize="20"/>
+                                <state key="normal" title="Send Feedback">
+                                    <color key="titleColor" red="0.70574593544006348" green="0.89714789390563965" blue="0.99939513206481934" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendFeedback:" destination="3sk-WE-xv8" eventType="touchUpInside" id="BDd-fW-Ely"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created by Kate Belinskaya" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feR-5n-Aku">
+                                <rect key="frame" x="149" y="340" width="302" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="302" id="TjV-0N-sq2"/>
+                                    <constraint firstAttribute="height" constant="21" id="aNY-ql-ob5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BookmanOldStyle" family="Bookman Old Style" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="jgo-KU-nKv" secondAttribute="centerX" id="CFr-bo-6bC"/>
+                            <constraint firstItem="jgo-KU-nKv" firstAttribute="top" secondItem="Wae-Hg-HK1" secondAttribute="bottom" constant="95" id="J3C-sl-o3h"/>
+                            <constraint firstAttribute="centerX" secondItem="Wae-Hg-HK1" secondAttribute="centerX" id="Rkw-N8-WuK"/>
+                            <constraint firstItem="feR-5n-Aku" firstAttribute="top" secondItem="Wae-Hg-HK1" secondAttribute="bottom" constant="30" id="Ys2-Bg-O1R"/>
+                            <constraint firstItem="Wae-Hg-HK1" firstAttribute="top" secondItem="Dwz-pr-9gH" secondAttribute="bottom" constant="100" id="dkd-Ny-LEM"/>
+                            <constraint firstAttribute="centerX" secondItem="feR-5n-Aku" secondAttribute="centerX" id="sDz-VD-D2f"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="feedbackButton" destination="jgo-KU-nKv" id="OiF-Xd-Rpx"/>
+                        <outlet property="logoFrameView" destination="Wae-Hg-HK1" id="gDY-HI-x3n"/>
+                        <outlet property="logoImageView" destination="qIS-bT-7Xz" id="4yP-xx-gtL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IpN-HQ-dlV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2057" y="1178"/>
         </scene>
         <!--Album Contents View Controller-->
         <scene sceneID="vIE-xu-kEj">
@@ -591,6 +700,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="180x180_v3" width="60" height="60"/>
         <image name="selected" width="54" height="54"/>
     </resources>
     <inferredMetricsTieBreakers>
