@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "iRate.h"
 
 @interface AboutViewController : UIViewController<MFMailComposeViewControllerDelegate>
 

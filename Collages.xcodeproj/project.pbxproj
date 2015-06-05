@@ -51,6 +51,7 @@
 		4AE8DF1B1B2061B0000190DF /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8DF1A1B2061B0000190DF /* AboutViewController.m */; };
 		4AE8DF1D1B2069A1000190DF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE8DF1C1B2069A1000190DF /* MessageUI.framework */; };
 		4AE8DF1F1B20B352000190DF /* BOOKOS.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 4AE8DF1E1B20B352000190DF /* BOOKOS.TTF */; };
+		4AE8DF231B21A180000190DF /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8DF221B21A180000190DF /* iRate.m */; };
 		4AF97C231AF624A400FC6AE0 /* InstagramActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF97C221AF624A400FC6AE0 /* InstagramActivity.m */; };
 /* End PBXBuildFile section */
 
@@ -150,6 +151,8 @@
 		4AE8DF1A1B2061B0000190DF /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		4AE8DF1C1B2069A1000190DF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4AE8DF1E1B20B352000190DF /* BOOKOS.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = BOOKOS.TTF; sourceTree = "<group>"; };
+		4AE8DF211B21A180000190DF /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
+		4AE8DF221B21A180000190DF /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
 		4AF97C211AF624A400FC6AE0 /* InstagramActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramActivity.h; sourceTree = "<group>"; };
 		4AF97C221AF624A400FC6AE0 /* InstagramActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramActivity.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,6 +201,7 @@
 		4A2126641AB2068500BF0F10 /* Collages */ = {
 			isa = PBXGroup;
 			children = (
+				4AE8DF201B21A162000190DF /* iRate */,
 				4A21269E1AB463F500BF0F10 /* AFNetworking */,
 				4A2127181AB463F600BF0F10 /* UIKit+AFNetworking */,
 				4A2126901AB4600B00BF0F10 /* InstaEngine */,
@@ -347,6 +351,15 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		4AE8DF201B21A162000190DF /* iRate */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8DF211B21A180000190DF /* iRate.h */,
+				4AE8DF221B21A180000190DF /* iRate.m */,
+			);
+			name = iRate;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -482,6 +495,7 @@
 				4A2127301AB463F600BF0F10 /* AFURLRequestSerialization.m in Sources */,
 				4A2127751AB463F600BF0F10 /* UIWebView+AFNetworking.m in Sources */,
 				4A555F691AB476C800B6287A /* ImageCollectionViewCell.m in Sources */,
+				4AE8DF231B21A180000190DF /* iRate.m in Sources */,
 				4A21276F1AB463F600BF0F10 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				4A6C84AA1B0FA1CC00286A09 /* ALAsset+ALAssetCategory.m in Sources */,
 				4A21272D1AB463F600BF0F10 /* AFNetworkReachabilityManager.m in Sources */,
