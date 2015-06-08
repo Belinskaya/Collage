@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4A2126611AB2068500BF0F10"
-               BuildableName = "Collages.app"
-               BlueprintName = "Collages"
-               ReferencedContainer = "container:Collages.xcodeproj">
+               BuildableName = "Framage.app"
+               BlueprintName = "Framage"
+               ReferencedContainer = "container:Framage.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4A21267A1AB2068500BF0F10"
-               BuildableName = "CollagesTests.xctest"
-               BlueprintName = "CollagesTests"
-               ReferencedContainer = "container:Collages.xcodeproj">
+               BuildableName = "FramageTests.xctest"
+               BlueprintName = "FramageTests"
+               ReferencedContainer = "container:Framage.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4A21267A1AB2068500BF0F10"
-               BuildableName = "CollagesTests.xctest"
-               BlueprintName = "CollagesTests"
-               ReferencedContainer = "container:Collages.xcodeproj">
+               BuildableName = "FramageTests.xctest"
+               BlueprintName = "FramageTests"
+               ReferencedContainer = "container:Framage.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4A2126611AB2068500BF0F10"
-            BuildableName = "Collages.app"
-            BlueprintName = "Collages"
-            ReferencedContainer = "container:Collages.xcodeproj">
+            BuildableName = "Framage.app"
+            BlueprintName = "Framage"
+            ReferencedContainer = "container:Framage.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4A2126611AB2068500BF0F10"
-            BuildableName = "Collages.app"
-            BlueprintName = "Collages"
-            ReferencedContainer = "container:Collages.xcodeproj">
+            BuildableName = "Framage.app"
+            BlueprintName = "Framage"
+            ReferencedContainer = "container:Framage.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,9 +96,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4A2126611AB2068500BF0F10"
-            BuildableName = "Collages.app"
-            BlueprintName = "Collages"
-            ReferencedContainer = "container:Collages.xcodeproj">
+            BuildableName = "Framage.app"
+            BlueprintName = "Framage"
+            ReferencedContainer = "container:Framage.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

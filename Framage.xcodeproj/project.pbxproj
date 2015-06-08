@@ -13,7 +13,7 @@
 		4A2126711AB2068500BF0F10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A21266F1AB2068500BF0F10 /* Main.storyboard */; };
 		4A2126731AB2068500BF0F10 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A2126721AB2068500BF0F10 /* Images.xcassets */; };
 		4A2126761AB2068500BF0F10 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A2126741AB2068500BF0F10 /* LaunchScreen.xib */; };
-		4A2126821AB2068500BF0F10 /* CollagesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2126811AB2068500BF0F10 /* CollagesTests.m */; };
+		4A2126821AB2068500BF0F10 /* FramageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2126811AB2068500BF0F10 /* FramageTests.m */; };
 		4A21268D1AB45D4600BF0F10 /* SearchUsersTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A21268C1AB45D4600BF0F10 /* SearchUsersTableView.m */; };
 		4A21269A1AB4638400BF0F10 /* Collage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2126921AB4638400BF0F10 /* Collage.m */; };
 		4A21269B1AB4638400BF0F10 /* InstaEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2126941AB4638400BF0F10 /* InstaEngine.m */; };
@@ -66,7 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4A2126621AB2068500BF0F10 /* Collages.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Collages.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A2126621AB2068500BF0F10 /* Framage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Framage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2126661AB2068500BF0F10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A2126671AB2068500BF0F10 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4A2126691AB2068500BF0F10 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -76,9 +76,9 @@
 		4A2126701AB2068500BF0F10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4A2126721AB2068500BF0F10 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4A2126751AB2068500BF0F10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		4A21267B1AB2068500BF0F10 /* CollagesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollagesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A21267B1AB2068500BF0F10 /* FramageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FramageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2126801AB2068500BF0F10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A2126811AB2068500BF0F10 /* CollagesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollagesTests.m; sourceTree = "<group>"; };
+		4A2126811AB2068500BF0F10 /* FramageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FramageTests.m; sourceTree = "<group>"; };
 		4A21268B1AB45D4600BF0F10 /* SearchUsersTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUsersTableView.h; sourceTree = "<group>"; };
 		4A21268C1AB45D4600BF0F10 /* SearchUsersTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUsersTableView.m; sourceTree = "<group>"; };
 		4A2126911AB4638400BF0F10 /* Collage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Collage.h; sourceTree = "<group>"; };
@@ -192,8 +192,8 @@
 		4A2126631AB2068500BF0F10 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4A2126621AB2068500BF0F10 /* Collages.app */,
-				4A21267B1AB2068500BF0F10 /* CollagesTests.xctest */,
+				4A2126621AB2068500BF0F10 /* Framage.app */,
+				4A21267B1AB2068500BF0F10 /* FramageTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -232,7 +232,7 @@
 		4A21267E1AB2068500BF0F10 /* CollagesTests */ = {
 			isa = PBXGroup;
 			children = (
-				4A2126811AB2068500BF0F10 /* CollagesTests.m */,
+				4A2126811AB2068500BF0F10 /* FramageTests.m */,
 				4A21267F1AB2068500BF0F10 /* Supporting Files */,
 			);
 			path = CollagesTests;
@@ -363,9 +363,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4A2126611AB2068500BF0F10 /* Collages */ = {
+		4A2126611AB2068500BF0F10 /* Framage */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4A2126851AB2068500BF0F10 /* Build configuration list for PBXNativeTarget "Collages" */;
+			buildConfigurationList = 4A2126851AB2068500BF0F10 /* Build configuration list for PBXNativeTarget "Framage" */;
 			buildPhases = (
 				4A21265E1AB2068500BF0F10 /* Sources */,
 				4A21265F1AB2068500BF0F10 /* Frameworks */,
@@ -375,14 +375,14 @@
 			);
 			dependencies = (
 			);
-			name = Collages;
+			name = Framage;
 			productName = Collages;
-			productReference = 4A2126621AB2068500BF0F10 /* Collages.app */;
+			productReference = 4A2126621AB2068500BF0F10 /* Framage.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4A21267A1AB2068500BF0F10 /* CollagesTests */ = {
+		4A21267A1AB2068500BF0F10 /* FramageTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4A2126881AB2068500BF0F10 /* Build configuration list for PBXNativeTarget "CollagesTests" */;
+			buildConfigurationList = 4A2126881AB2068500BF0F10 /* Build configuration list for PBXNativeTarget "FramageTests" */;
 			buildPhases = (
 				4A2126771AB2068500BF0F10 /* Sources */,
 				4A2126781AB2068500BF0F10 /* Frameworks */,
@@ -393,9 +393,9 @@
 			dependencies = (
 				4A21267D1AB2068500BF0F10 /* PBXTargetDependency */,
 			);
-			name = CollagesTests;
+			name = FramageTests;
 			productName = CollagesTests;
-			productReference = 4A21267B1AB2068500BF0F10 /* CollagesTests.xctest */;
+			productReference = 4A21267B1AB2068500BF0F10 /* FramageTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -417,7 +417,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4A21265D1AB2068500BF0F10 /* Build configuration list for PBXProject "Collages" */;
+			buildConfigurationList = 4A21265D1AB2068500BF0F10 /* Build configuration list for PBXProject "Framage" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -430,8 +430,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4A2126611AB2068500BF0F10 /* Collages */,
-				4A21267A1AB2068500BF0F10 /* CollagesTests */,
+				4A2126611AB2068500BF0F10 /* Framage */,
+				4A21267A1AB2068500BF0F10 /* FramageTests */,
 			);
 		};
 /* End PBXProject section */
@@ -508,7 +508,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A2126821AB2068500BF0F10 /* CollagesTests.m in Sources */,
+				4A2126821AB2068500BF0F10 /* FramageTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,7 +517,7 @@
 /* Begin PBXTargetDependency section */
 		4A21267D1AB2068500BF0F10 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4A2126611AB2068500BF0F10 /* Collages */;
+			target = 4A2126611AB2068500BF0F10 /* Framage */;
 			targetProxy = 4A21267C1AB2068500BF0F10 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -626,7 +626,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Collages/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Framage;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -640,7 +640,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Collages/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Framage;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -660,8 +660,8 @@
 				);
 				INFOPLIST_FILE = CollagesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Collages.app/Collages";
+				PRODUCT_NAME = FramageTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Framage.app/Framage";
 			};
 			name = Debug;
 		};
@@ -675,15 +675,15 @@
 				);
 				INFOPLIST_FILE = CollagesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Collages.app/Collages";
+				PRODUCT_NAME = FramageTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Framage.app/Framage";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4A21265D1AB2068500BF0F10 /* Build configuration list for PBXProject "Collages" */ = {
+		4A21265D1AB2068500BF0F10 /* Build configuration list for PBXProject "Framage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4A2126831AB2068500BF0F10 /* Debug */,
@@ -692,7 +692,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4A2126851AB2068500BF0F10 /* Build configuration list for PBXNativeTarget "Collages" */ = {
+		4A2126851AB2068500BF0F10 /* Build configuration list for PBXNativeTarget "Framage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4A2126861AB2068500BF0F10 /* Debug */,
@@ -701,7 +701,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4A2126881AB2068500BF0F10 /* Build configuration list for PBXNativeTarget "CollagesTests" */ = {
+		4A2126881AB2068500BF0F10 /* Build configuration list for PBXNativeTarget "FramageTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4A2126891AB2068500BF0F10 /* Debug */,
