@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *selectedPhotosCV;
 @property (weak, nonatomic) IBOutlet UICollectionView *userPhotosCollectionView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *permissionLabel;
 
 //other property
 @property (strong, nonatomic) UIBarButtonItem *btnBack;
@@ -53,12 +54,14 @@ NSInteger photoCount = 200;
     
     _userPhotosCollectionView.allowsMultipleSelection = YES;
     
+    _permissionLabel.text = [NSString stringWithFormat:@"Please, select photos.\n Note that This photos belong to @%@. Saving it to your collage might need permission.", _user.userName];
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(getPhotos:)
                                                  name:@"GotPhotoData"
                                                object:nil];
-    NSURL *url = [_iEngine getPhotoSearchURLWith:_userID];
+    NSURL *url = [_iEngine getPhotoSearchURLWith:_user.userId];
     [_iEngine  getDataWith:url sendNotification:@"GotPhotoData"];
     
     NSString *buttonTitle =  @"Done";

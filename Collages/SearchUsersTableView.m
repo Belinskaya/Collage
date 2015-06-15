@@ -28,7 +28,8 @@
 
 @implementation SearchUsersTableView
 
-NSString *userID;
+//NSString *userID;
+InstaUser *selectedUser;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -129,8 +130,8 @@ NSString *userID;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    InstaUser *user = _findedUsers[indexPath.row];
-    userID = user.userId;
+    selectedUser = _findedUsers[indexPath.row];
+    //userID = user.userId;
     [self performSegueWithIdentifier:@"showUsersPhotos" sender:self];
 }
 
@@ -152,7 +153,7 @@ NSString *userID;
     if ([[segue identifier] isEqualToString:@"showUsersPhotos"]) {
         
         UserPhotosViewController *destView = segue.destinationViewController;
-        destView.userID = userID;
+        destView.user = selectedUser;
         
     }
 }

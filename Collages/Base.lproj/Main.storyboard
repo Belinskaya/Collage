@@ -612,17 +612,17 @@
                                     <outlet property="delegate" destination="cLS-jb-6bj" id="3DE-lW-IyB"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please, select photos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dfn-pT-t3Z">
-                                <rect key="frame" x="16" y="129" width="568" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please, select photos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dfn-pT-t3Z">
+                                <rect key="frame" x="16" y="129" width="568" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="571-5X-Yah"/>
+                                    <constraint firstAttribute="height" constant="100" id="571-5X-Yah"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BookmanOldStyle" family="Bookman Old Style" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TNg-JZ-fJD">
-                                <rect key="frame" x="0.0" y="160" width="600" height="440"/>
+                                <rect key="frame" x="0.0" y="239" width="600" height="361"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rkI-fd-h9a">
                                     <size key="itemSize" width="297" height="257"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -693,6 +693,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="g6D-IR-7aU" id="CcY-Oc-lW7"/>
+                        <outlet property="permissionLabel" destination="Dfn-pT-t3Z" id="Mtn-37-iZz"/>
                         <outlet property="selectedPhotosCV" destination="BUc-9g-AV1" id="D0s-Ox-WsL"/>
                         <outlet property="userPhotosCollectionView" destination="TNg-JZ-fJD" id="o1w-eo-H7n"/>
                     </connections>

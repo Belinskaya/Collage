@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InstaUser.h"
 
 @interface UserPhotosViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong) NSString *userID;
+@property (nonatomic, strong) InstaUser *user;
 
 @end
