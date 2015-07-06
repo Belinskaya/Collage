@@ -1,6 +1,6 @@
 # Framage
-Collage app, which allows to create awesome collage. With this app user can get photos from Instagram or from his own photo library and create awesome collages. User can choose from several different templates. 
-FEATURES
+Collage app, which allows to create awesome collage. With this app user can get photos from Instagram or from his own photo library and create awesome collages. User can choose from several different templates.
+######FEATURES:
 - Search in Instagram for new pictures for collage
 - Share via email, iMessages, Instagram, Twitter, etc
 - 12 templates
