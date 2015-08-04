@@ -8,7 +8,7 @@ Collage app, which allows to create awesome collage. With this app user can get 
 - Change the border size
 - Change the border colour
 
-##App in [iTunes Store](https://itunes.apple.com/us/app/framage/id1002882107?ls=1&mt=8)
+##App in [App Store](https://itunes.apple.com/us/app/framage/id1002882107?ls=1&mt=8)
 
 ##Preview
 | Example 1 | Example 2  | 
