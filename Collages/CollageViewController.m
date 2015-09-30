@@ -100,7 +100,6 @@ float borderConer;
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"collage_templates" ofType:@"txt"];
     
-    //création d'un string avec le contenu du JSON
     NSString *myJSON = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
     NSAssert(myJSON, @"File collage_templates.txt couldn't be read!");
     

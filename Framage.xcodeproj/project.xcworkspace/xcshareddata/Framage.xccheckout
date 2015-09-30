@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FB1B3B1D-250B-4AC8-A8F2-ED3953972228</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Framage</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DA6E71D1AD24983205D6FCAE0929214DEE058DDE</key>
+		<string>https://github.com/Belinskaya/Collage.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Framage.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DA6E71D1AD24983205D6FCAE0929214DEE058DDE</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Belinskaya/Collage.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DA6E71D1AD24983205D6FCAE0929214DEE058DDE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DA6E71D1AD24983205D6FCAE0929214DEE058DDE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Collages</string>
+		</dict>
+	</array>
+</dict>
+</plist>
